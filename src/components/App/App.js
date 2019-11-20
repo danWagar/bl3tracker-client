@@ -5,6 +5,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import LandingPage from '../LandingPage/LandingPage.js';
 import LoginPage from '../../routes/LoginPage/LoginPage';
+import InventoryPage from '../../routes/InventoryPage/InventoryPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import './App.css';
@@ -29,7 +30,7 @@ class App extends Component {
             <Route exact path={'/'} component={LandingPage} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
-            <PrivateOnlyRoute path={'/inventory'} component={InventoryPage} />
+            <PrivateRoute path={'/inventory'} component={InventoryPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>
