@@ -3,6 +3,7 @@ import { Section } from '../../components/Utils/Utils';
 import trackerService from '../../services/bl3-tracker-api-service';
 import Character from '../../components/Character/Character';
 import AddCharacterForm from '../../components/AddCharacterForm/AddCharacterForm';
+import './InventoryPage.css';
 
 export default class InventoryPage extends Component {
   state = {

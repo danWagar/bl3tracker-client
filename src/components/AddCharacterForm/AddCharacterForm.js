@@ -31,7 +31,7 @@ export default class AddCharacterForm extends Component {
         <div role="alert">{error && <p className="red">{error}</p>}</div>
         <div className="character">
           <label htmlFor="AddCharacterForm__character">Character</label>
-          <select required name="character" id="LoginForm__character">
+          <select required name="character" id="AddCharacterForm__character">
             <option value="FL4K">FL4K</option>
             <option value="Zane">Zane</option>
             <option value="Moze">Moze</option>
@@ -39,8 +39,8 @@ export default class AddCharacterForm extends Component {
           </select>
         </div>
         <div className="name">
-          <label htmlFor="LoginForm__name">Name (optional)</label>
-          <Input required name="name" type="text" id="LoginForm__name"></Input>
+          <label htmlFor="AddCharacterForm__name">Name (optional)</label>
+          <Input required name="name" type="text" id="AddCharacterForm__name"></Input>
         </div>
         <Button type="submit">Submit</Button>
       </form>

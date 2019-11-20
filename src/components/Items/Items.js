@@ -14,12 +14,15 @@ export default class Items extends Component {
   render() {
     return (
       <table>
-        <tbody>
+        <thead>
           <tr>
+            <th></th>
             <th>manufacturer</th>
             <th>type</th>
             <th>name</th>
           </tr>
+        </thead>
+        <tbody>
           {this.state.items.map(item => (
             <Item item={item} />
           ))}

@@ -1,0 +1,37 @@
+table {
+  border-collapse: collapse;
+}
+
+thead {
+  display: table-header-group;
+  text-align: left;
+}
+
+th:nth-child(1) {
+  width: 40px;
+}
+th:nth-child(2) {
+  width: 150px;
+}
+th:nth-child(3) {
+  width: 120px;
+}
+
+tbody {
+  display: table-row-group;
+}
+
+tr:nth-child(even) {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+tr:nth-child(odd) {
+  background-color: #252525;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
