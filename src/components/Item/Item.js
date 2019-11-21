@@ -9,10 +9,11 @@ export default class Item extends Component {
   };
 
   generateUserItemForm() {
+    console.log(this.props.item);
     return (
       <tr>
         <td colSpan="4">
-          <UserItemForm />
+          <UserItemForm mfr_id={this.props.item.mfr_id} />
         </td>
       </tr>
     );
