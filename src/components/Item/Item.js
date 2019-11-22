@@ -8,12 +8,20 @@ export default class Item extends Component {
     addUserItem: false
   };
 
+  toggleAddUserItem = () => {
+    this.setState({ addUserItem: !this.state.addUserItem });
+  };
+
   generateUserItemForm() {
     console.log(this.props.item);
     return (
       <tr>
         <td colSpan="4">
-          <UserItemForm mfr_id={this.props.item.mfr_id} />
+          <UserItemForm
+            toggleAddUserItem={this.toggleAddUserItem}
+            mfr_id={this.props.item.mfr_id}
+            weapon_id={this.props.item.id}
+          />
         </td>
       </tr>
     );

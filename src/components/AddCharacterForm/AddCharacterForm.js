@@ -1,33 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Input } from '../Utils/Utils';
-import TrackerApiService from '../../services/bl3-tracker-api-service';
+import CharacterContext from '../../contexts/CharacterContext';
 
 export default class AddCharacterForm extends Component {
-  state = { error: null };
-
-  handleSubmitAddCharacter = ev => {
-    ev.preventDefault();
-    this.setState({ error: null });
-    const { character, name } = ev.target;
-
-    TrackerApiService.addCharacter({
-      character: character.value,
-      character_name: name.value
-    })
-      .then(res => {
-        character.value = '';
-        name.value = '';
-        this.props.updateChars();
-      })
-      .catch(res => {
-        this.setState({ error: res.error });
-      });
-  };
+  static contextType = CharacterContext;
 
   render() {
-    const { error } = this.state;
+    const { error, handleSubmitAddCharacter } = this.context;
     return (
-      <form className="AddCharacterForm" onSubmit={this.handleSubmitAddCharacter}>
+      <form className="AddCharacterForm" onSubmit={handleSubmitAddCharacter}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
         <div className="character">
           <label htmlFor="AddCharacterForm__character">Character</label>
