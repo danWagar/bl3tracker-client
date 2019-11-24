@@ -21,12 +21,11 @@ export default class UserItemForm extends Component {
   }
 
   addPrefixOptions() {
-    console.log(this.state.prefixes);
     return (
       <>
         <option value="">none</option>
         {this.state.prefixes.map(pf => (
-          <option value={pf.mfr_id}>{pf.title}</option>
+          <option value={pf.id}>{pf.title}</option>
         ))}
       </>
     );
@@ -68,7 +67,7 @@ export default class UserItemForm extends Component {
     } = e.target;
 
     this.context.handleSubmitWeapon({
-      char_id: this.context.currentCharAddListExpanded,
+      char_id: this.context.currentCharAddWeaponExpanded,
       weapon_id: this.props.weapon_id,
       prefix_1: prefix_1.value,
       prefix_2: prefix_2.value,

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CharacterContext from '../../contexts/CharacterContext';
 import TokenService from '../../services/token-service';
 import './Header.css';
 
 export default class Header extends Component {
+  static contextType = CharacterContext;
+
   handleLogoutClick = () => {
+    this.context.clearContext();
     TokenService.clearAuthToken();
   };
 

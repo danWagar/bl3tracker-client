@@ -2,8 +2,25 @@ import config from '../config';
 import TokenService from '../services/token-service';
 
 const Bl3TrackerApiService = {
-  getItems() {
-    return fetch(`${config.API_ENDPOINT}/weapons`, {
+  getWeapons(qryParam) {
+    let qs = '?';
+    (function() {
+      //if (terror) qs = qs.concat('terror=true&');
+      if (qryParam) qs = qs.concat(`${qryParam}`);
+      else qs = qs.substring(0, qs.length - 1);
+    })();
+    return fetch(`${config.API_ENDPOINT}/items/weapons${qs}`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
+  getShields(qryParam) {
+    let qs = '?';
+    (function() {
+      if (qryParam) qs = qs.concat(`${qryParam}`);
+      else qs = qs.substring(0, qs.length - 1);
+    })();
+    return fetch(`${config.API_ENDPOINT}/items/shields${qs}`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
@@ -43,7 +60,7 @@ const Bl3TrackerApiService = {
   },
 
   getPrefixes(id) {
-    return fetch(`${config.API_ENDPOINT}/weapons/prefixes/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/items/weapons/prefixes/${id}`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
