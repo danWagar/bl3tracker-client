@@ -42,6 +42,7 @@ export class CharacterProvider extends Component {
         //character.value = '';
         //name.value = '';
         char.weapons = [];
+        char.shields = [];
         char.addWeapons = false;
         this.setState({ characters: [...this.state.characters, char] });
       })
@@ -53,6 +54,7 @@ export class CharacterProvider extends Component {
   initCharacters = characters => {
     let chars = characters.map(char => {
       char.weapons = [];
+      char.shields = [];
       char.addInventory = false;
       return char;
     });
@@ -63,6 +65,15 @@ export class CharacterProvider extends Component {
     let characters = this.state.characters;
     characters = characters.map(char => {
       if (char.id === char_id) char.weapons = weapons;
+      return char;
+    });
+    this.setState({ characters: characters });
+  };
+
+  initCharacterShields = (char_id, shields) => {
+    let characters = this.state.characters;
+    characters = characters.map(char => {
+      if (char.id === char_id) char.shields = shields;
       return char;
     });
     this.setState({ characters: characters });
@@ -102,15 +113,33 @@ export class CharacterProvider extends Component {
       .then(res => {
         let characters = this.state.characters;
         characters = characters.map(char => {
-          //console.log('char.id: ' + char.id + ' res.char_id: ' + res.char_id);
           if (char.id === res.char_id) {
             char.weapons = [...char.weapons, res];
-            console.log(char.weapons);
           }
           return char;
         });
-        console.log(res);
-        console.log(characters);
+        this.setState({ characters: characters });
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
+  handleSubmitShield = shield => {
+    for (const [key, value] of Object.entries(shield)) if (value === '') shield[key] = null;
+
+    trackerService
+      .postShield(shield)
+      .then(res => {
+        let characters = this.state.characters;
+        characters = characters.map(char => {
+          //console.log('char.id: ' + char.id + ' res.char_id: ' + res.char_id);
+          if (char.id === res.char_id) {
+            char.shields = [...char.shields, res];
+            //console.log(char.weapons);
+          }
+          return char;
+        });
         this.setState({ characters: characters });
       })
       .catch(res => {
@@ -138,11 +167,13 @@ export class CharacterProvider extends Component {
       clearContext: this.clearContext,
       handleSubmitAddCharacter: this.handleSubmitAddCharacter,
       handleSubmitWeapon: this.handleSubmitWeapon,
+      handleSubmitShield: this.handleSubmitShield,
       updateChars: this.updateChars,
       addWeaponClickEvent: this.addWeaponClickEvent,
       addShieldClickEvent: this.addShieldClickEvent,
       initCharacters: this.initCharacters,
-      initCharacterWeapons: this.initCharacterWeapons
+      initCharacterWeapons: this.initCharacterWeapons,
+      initCharacterShields: this.initCharacterShields
     };
     return <CharacterContext.Provider value={value}>{this.props.children}</CharacterContext.Provider>;
   }

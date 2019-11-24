@@ -36,6 +36,17 @@ const Bl3TrackerApiService = {
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
 
+  postShield(shield_data) {
+    return fetch(`${config.API_ENDPOINT}/inventory/shields`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(shield_data)
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
   getCharacters() {
     return fetch(`${config.API_ENDPOINT}/characters`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
@@ -55,6 +66,12 @@ const Bl3TrackerApiService = {
 
   getCharacterWeapons(char_id) {
     return fetch(`${config.API_ENDPOINT}/inventory/weapons/${char_id}`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
+  getCharacterShields(char_id) {
+    return fetch(`${config.API_ENDPOINT}/inventory/shields/${char_id}`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },

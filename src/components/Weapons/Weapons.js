@@ -11,6 +11,7 @@ export default class Weapons extends Component {
     const weapons = character.weapons;
     return (
       <ul>
+        <h3>Weapons</h3>
         {weapons.map(wpn => {
           return (
             <li>

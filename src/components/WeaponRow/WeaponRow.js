@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import UserItemForm from '../UserItemForm/UserItemForm';
+import UserWeaponForm from '../UserWeaponForm/UserWeaponForm';
 
 export default class WeaponRow extends Component {
   state = {
@@ -12,11 +12,11 @@ export default class WeaponRow extends Component {
     this.setState({ addUserItem: !this.state.addUserItem });
   };
 
-  generateUserItemForm() {
+  generateUserWeaponForm() {
     return (
       <tr>
         <td colSpan="4">
-          <UserItemForm
+          <UserWeaponForm
             toggleAddUserItem={this.toggleAddUserItem}
             mfr_id={this.props.item.mfr_id}
             weapon_id={this.props.item.id}
@@ -38,7 +38,7 @@ export default class WeaponRow extends Component {
           <td>{this.props.item.weapon_type}</td>
           <td>{this.props.item.name}</td>
         </tr>
-        {this.state.addUserItem && this.generateUserItemForm()}
+        {this.state.addUserItem && this.generateUserWeaponForm()}
       </>
     );
   }

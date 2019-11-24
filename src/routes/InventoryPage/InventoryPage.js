@@ -24,6 +24,13 @@ export default class InventoryPage extends Component {
           trackerService
             .getCharacterWeapons(char.id)
             .then(weapons => this.context.initCharacterWeapons(char.id, weapons))
+        )
+      )
+      .then(() =>
+        this.context.characters.map(char =>
+          trackerService
+            .getCharacterShields(char.id)
+            .then(shields => this.context.initCharacterShields(char.id, shields))
             .then(this.setState({ loaded: true }))
         )
       )

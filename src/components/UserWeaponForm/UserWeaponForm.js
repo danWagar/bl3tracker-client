@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import trackerService from '../../services/bl3-tracker-api-service';
 
-export default class UserItemForm extends Component {
+export default class UserWeaponForm extends Component {
   static contextType = CharacterContext;
 
   state = {
@@ -32,7 +32,7 @@ export default class UserItemForm extends Component {
   }
 
   applyFilterToAnointments = e => {
-    if (e.target.id === 'UserItemForm_filter_terror') this.filters.terror = !this.filters.terror;
+    if (e.target.id === 'UserWeaponForm_filter_terror') this.filters.terror = !this.filters.terror;
     if (e.target.name === 'class') this.filters.class = e.target.value;
     trackerService
       .getAnointments(this.filters.terror, this.filters.class)
@@ -106,17 +106,17 @@ export default class UserItemForm extends Component {
   */
   render() {
     return (
-      <form className="UserItemForm" onSubmit={this.handleSubmit}>
-        <label htmlFor="UserItemForm__prefix1">Prefix 1</label>
-        <select name="prefix_1" id="UserItemForm__prefix1">
+      <form className="UserWeaponForm" onSubmit={this.handleSubmit}>
+        <label htmlFor="UserWeaponForm__prefix1">Prefix 1</label>
+        <select name="prefix_1" id="UserWeaponForm__prefix1">
           {this.addPrefixOptions()}
         </select>
-        <label htmlFor="UserItemForm__prefix2">Prefix 2</label>
-        <select name="prefix_2" id="UserItemForm__prefix2">
+        <label htmlFor="UserWeaponForm__prefix2">Prefix 2</label>
+        <select name="prefix_2" id="UserWeaponForm__prefix2">
           {this.addPrefixOptions()}
         </select>
-        <label htmlFor="UserItemForm__element">Element</label>
-        <select name="element" id="UserItemForm__element">
+        <label htmlFor="UserWeaponForm__element">Element</label>
+        <select name="element" id="UserWeaponForm__element">
           <option value="normal">normal</option>
           <option value="fire">fire</option>
           <option value="corrosive">corrosive</option>
@@ -125,68 +125,68 @@ export default class UserItemForm extends Component {
           <option value="radiation">radiation</option>
         </select>
         <span>Filter Anointments:</span>
-        <div className="UserItemForm_filter">
-          <label htmlFor="UserItemForm_filter_terror">Terror</label>
-          <input type="checkbox" id="UserItemForm_filter_terror" onChange={this.applyFilterToAnointments} />
-          <label htmlFor="UserItemForm_filter_universal">Universal</label>
+        <div className="UserWeaponForm_filter">
+          <label htmlFor="UserWeaponForm_filter_terror">Terror</label>
+          <input type="checkbox" id="UserWeaponForm_filter_terror" onChange={this.applyFilterToAnointments} />
+          <label htmlFor="UserWeaponForm_filter_universal">Universal</label>
           <input
             type="radio"
-            id="UserItemForm_filter_universal"
+            id="UserWeaponForm_filter_universal"
             name="class"
             value="Universal"
             onChange={this.applyFilterToAnointments}
           />
-          <label htmlFor="UserItemForm_filter_beastmaster">Beastmaster</label>
+          <label htmlFor="UserWeaponForm_filter_beastmaster">Beastmaster</label>
           <input
             type="radio"
             name="class"
-            id="UserItemForm_filter_beastmaster"
+            id="UserWeaponForm_filter_beastmaster"
             value="Beastmaster"
             onChange={this.applyFilterToAnointments}
           />
-          <label htmlFor="UserItemForm_filter_gunner">Gunner</label>
+          <label htmlFor="UserWeaponForm_filter_gunner">Gunner</label>
           <input
             type="radio"
             name="class"
-            id="UserItemForm_filter_gunner"
+            id="UserWeaponForm_filter_gunner"
             value="Gunner"
             onChange={this.applyFilterToAnointments}
           />
-          <label htmlFor="UserItemForm_filter_operative">Operative</label>
+          <label htmlFor="UserWeaponForm_filter_operative">Operative</label>
           <input
             type="radio"
             name="class"
-            id="UserItemForm_filter_operative"
+            id="UserWeaponForm_filter_operative"
             value="Operative"
             onChange={this.applyFilterToAnointments}
           />
-          <label htmlFor="UserItemForm_filter_siren">Siren</label>
+          <label htmlFor="UserWeaponForm_filter_siren">Siren</label>
           <input
             type="radio"
             name="class"
-            id="UserItemForm_filter_siren"
+            id="UserWeaponForm_filter_siren"
             value="Siren"
             onChange={this.applyFilterToAnointments}
           />
         </div>
-        <label htmlFor="UserItemForm__anointment_id">Anointment</label>
-        <select name="anointment_id" id="UserItemForm__anointment_id">
+        <label htmlFor="UserWeaponForm__anointment_id">Anointment</label>
+        <select name="anointment_id" id="UserWeaponForm__anointment_id">
           {this.addAnointmentsOptions()}
         </select>
-        <label htmlFor="UserItemForm__item_score">Item Score</label>
-        <input type="text" name="item_score" id="UserItemForm__item_score" />
-        <label htmlFor="UserItemForm__damabe">Damage</label>
-        <input type="text" name="damage" id="UserItemForm__damage" />
-        <label htmlFor="UserItemForm__accuracy">accuracy</label>
-        <input type="text" name="accuracy" id="UserItemForm__accuracy" />
-        <label htmlFor="UserItemForm__handling">handling</label>
-        <input type="text" name="handling" id="UserItemForm__handling" />
-        <label htmlFor="UserItemForm__reload_time">Reload Time</label>
-        <input type="text" name="reload_time" id="UserItemForm__reload_time" />
-        <label htmlFor="UserItemForm__fire_rate">Fire Rate</label>
-        <input type="text" name="fire_rate" id="UserItemForm__fire_rate" />
-        <label htmlFor="UserItemForm__magazine_size">Magazine Size</label>
-        <input type="text" name="magazine_size" id="UserItemForm__magazine_size" />
+        <label htmlFor="UserWeaponForm__item_score">Item Score</label>
+        <input type="text" name="item_score" id="UserWeaponForm__item_score" />
+        <label htmlFor="UserWeaponForm__damabe">Damage</label>
+        <input type="text" name="damage" id="UserWeaponForm__damage" />
+        <label htmlFor="UserWeaponForm__accuracy">accuracy</label>
+        <input type="text" name="accuracy" id="UserWeaponForm__accuracy" />
+        <label htmlFor="UserWeaponForm__handling">handling</label>
+        <input type="text" name="handling" id="UserWeaponForm__handling" />
+        <label htmlFor="UserWeaponForm__reload_time">Reload Time</label>
+        <input type="text" name="reload_time" id="UserWeaponForm__reload_time" />
+        <label htmlFor="UserWeaponForm__fire_rate">Fire Rate</label>
+        <input type="text" name="fire_rate" id="UserWeaponForm__fire_rate" />
+        <label htmlFor="UserWeaponForm__magazine_size">Magazine Size</label>
+        <input type="text" name="magazine_size" id="UserWeaponForm__magazine_size" />
         <button type="submit">Submit</button>
       </form>
     );

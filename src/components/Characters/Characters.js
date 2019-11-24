@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import Weapons from '../Weapons/Weapons';
+import Shields from '../Shields/Shields';
 import WeaponsTable from '../WeaponsTable/WeaponsTable';
 import ShieldsTable from '../ShieldsTable/ShieldsTable';
 
@@ -20,6 +21,7 @@ export default class Characters extends Component {
       <div>
         <h2>{char.character_name}</h2>
         <Weapons charId={char.id} />
+        <Shields charId={char.id} />
         <button onClick={() => addWeaponClickEvent(char.id)}>Add Weapons</button>
         {currentCharAddWeaponExpanded === char.id ? <WeaponsTable /> : ''}
         <button onClick={() => addShieldClickEvent(char.id)}>Add Shields</button>

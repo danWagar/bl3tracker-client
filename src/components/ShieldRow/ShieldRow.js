@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import UserItemForm from '../UserItemForm/UserItemForm';
+import UserShieldForm from '../UserShieldForm/UserShieldForm';
 
 export default class ShieldRow extends Component {
   state = {
@@ -12,11 +12,11 @@ export default class ShieldRow extends Component {
     this.setState({ addUserItem: !this.state.addUserItem });
   };
 
-  generateUserItemForm() {
+  generateUserShieldForm() {
     return (
       <tr>
         <td colSpan="4">
-          <UserItemForm
+          <UserShieldForm
             toggleAddUserItem={this.toggleAddUserItem}
             mfr_id={this.props.shield.mfr_id}
             shield_id={this.props.shield.id}
@@ -37,7 +37,7 @@ export default class ShieldRow extends Component {
           <td>{this.props.shield.mfr_name}</td>
           <td>{this.props.shield.name}</td>
         </tr>
-        {this.state.addUserItem && this.generateUserItemForm()}
+        {this.state.addUserItem && this.generateUserShieldForm()}
       </>
     );
   }
