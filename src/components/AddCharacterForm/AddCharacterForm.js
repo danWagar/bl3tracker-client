@@ -5,10 +5,15 @@ import CharacterContext from '../../contexts/CharacterContext';
 export default class AddCharacterForm extends Component {
   static contextType = CharacterContext;
 
+  handleFormSubmit = e => {
+    this.context.handleSubmitAddCharacter(e);
+    this.props.toggleAddCharacter();
+  };
+
   render() {
-    const { error, handleSubmitAddCharacter } = this.context;
+    const { error } = this.context;
     return (
-      <form className="AddCharacterForm" onSubmit={handleSubmitAddCharacter}>
+      <form className="AddCharacterForm" onSubmit={this.handleFormSubmit}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
         <div className="character">
           <label htmlFor="AddCharacterForm__character">Character</label>

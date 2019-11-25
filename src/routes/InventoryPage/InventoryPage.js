@@ -37,16 +37,18 @@ export default class InventoryPage extends Component {
       .catch(this.context.setError);
   }
 
+  toggleAddCharacter = () => {
+    this.setState({ addCharacter: !this.state.addCharacter });
+  };
+
   render() {
     if (!this.state.loaded) return <p>Loading</p>;
     const { error } = this.context;
     return (
       <Section className="InventoryPage">
         {error && <p className="red">There was an error, try again</p>}
-        <button onClick={e => this.setState({ addCharacter: !this.state.addCharacter })}>
-          Add Character
-        </button>
-        {this.state.addCharacter && <AddCharacterForm />}
+        <button onClick={this.toggleAddCharacter}>Add Character</button>
+        {this.state.addCharacter && <AddCharacterForm toggleAddCharacter={this.toggleAddCharacter} />}
         <Characters />
       </Section>
     );

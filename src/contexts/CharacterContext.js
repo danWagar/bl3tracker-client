@@ -39,12 +39,46 @@ export class CharacterProvider extends Component {
         character_name: name.value
       })
       .then(char => {
-        //character.value = '';
-        //name.value = '';
         char.weapons = [];
         char.shields = [];
         char.addWeapons = false;
         this.setState({ characters: [...this.state.characters, char] });
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
+  handleSubmitEditCharacter = (char_id, ev) => {
+    ev.preventDefault();
+    this.setState({ error: null });
+    const { name } = ev.target;
+
+    trackerService
+      .patchCharacter(char_id, { character_name: name.value })
+      .then(() => {
+        let characters = this.state.characters.map(char => {
+          if (char.id === char_id) char.character_name = name.value;
+          return char;
+        });
+        this.setState({ characters: [...characters] });
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
+  handleDeleteCharacter = e => {
+    this.setState({ error: null });
+    const char_id = Number(e.target.value);
+    trackerService
+      .deleteCharacter(char_id)
+      .then(() => {
+        let characters = this.state.characters.filter(char => {
+          return char.id !== char_id;
+        });
+
+        this.setState({ characters: [...characters] });
       })
       .catch(res => {
         this.setState({ error: res.error });
@@ -62,6 +96,7 @@ export class CharacterProvider extends Component {
   };
 
   initCharacterWeapons = (char_id, weapons) => {
+    this.setState({ error: null });
     let characters = this.state.characters;
     characters = characters.map(char => {
       if (char.id === char_id) char.weapons = weapons;
@@ -88,22 +123,6 @@ export class CharacterProvider extends Component {
     if (this.state.currentCharAddShieldExpanded === id) id = null;
     this.setState({ currentCharAddShieldExpanded: id });
   };
-
-  /*
-  updateChars = () => {
-    //refactor: inserting returns item in res, so just need to update state by passing res from character.js
-    trackerService
-      .getCharacters()
-      .then(res =>
-        this.setState({
-          characters: [this.state.characters[0], ...res],
-          addCharacter: !this.state.addCharacter
-        })
-      )
-      .then(() => console.log(this.state.characters))
-      .catch(console.log('error'));
-  };
-  */
 
   handleSubmitWeapon = wpn => {
     for (const [key, value] of Object.entries(wpn)) if (value === '') wpn[key] = null;
@@ -133,10 +152,8 @@ export class CharacterProvider extends Component {
       .then(res => {
         let characters = this.state.characters;
         characters = characters.map(char => {
-          //console.log('char.id: ' + char.id + ' res.char_id: ' + res.char_id);
           if (char.id === res.char_id) {
             char.shields = [...char.shields, res];
-            //console.log(char.weapons);
           }
           return char;
         });
@@ -145,6 +162,96 @@ export class CharacterProvider extends Component {
       .catch(res => {
         this.setState({ error: res.error });
       });
+  };
+
+  handleDeleteWeapon = e => {
+    const id = Number(e.target.value);
+    trackerService
+      .deleteUserWeapon(id)
+      .then(() => {
+        let characters = this.state.characters;
+        characters = characters.map(char => {
+          char.weapons = char.weapons.filter(wpn => wpn.user_weapon_id !== id);
+          return char;
+        });
+        console.log(characters);
+        this.setState({ characters: characters });
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
+  handleDeleteShield = e => {
+    const id = Number(e.target.value);
+    trackerService
+      .deleteUserShield(id)
+      .then(() => {
+        let characters = this.state.characters;
+        characters = characters.map(char => {
+          char.shields = char.shields.filter(shield => shield.user_shield_id !== id);
+          return char;
+        });
+        console.log(characters);
+        this.setState({ characters: characters });
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
+  handleMoveWeapon = e => {
+    const { currentChar, moveToCharId, userWeaponId } = JSON.parse(e.target.value);
+    const toUpdate = {
+      char_id: moveToCharId
+    };
+
+    trackerService.patchUserWeapon(userWeaponId, toUpdate).then(() => {
+      let characters = this.state.characters;
+      let weaponToMove;
+      let moveToCharAt;
+      characters = characters.map((char, i) => {
+        if (char.id === currentChar)
+          char.weapons = char.weapons.filter(wpn => {
+            if (wpn.user_weapon_id === userWeaponId) {
+              weaponToMove = wpn;
+            }
+            return wpn.user_weapon_id !== userWeaponId;
+          });
+        else if (char.id === moveToCharId) moveToCharAt = i;
+        return char;
+      });
+      characters[moveToCharAt].weapons = [...characters[moveToCharAt].weapons, weaponToMove];
+      this.setState({ characters: characters });
+    });
+  };
+
+  handleMoveShield = e => {
+    console.log('in handleMoveShield');
+    const { currentChar, moveToCharId, userShieldId } = JSON.parse(e.target.value);
+    const toUpdate = {
+      char_id: moveToCharId
+    };
+    console.log(toUpdate);
+
+    trackerService.patchUserShield(userShieldId, toUpdate).then(() => {
+      let characters = this.state.characters;
+      let shieldToMove;
+      let moveToCharAt;
+      characters = characters.map((char, i) => {
+        if (char.id === currentChar)
+          char.shields = char.shields.filter(shield => {
+            if (shield.user_shield_id === userShieldId) {
+              shieldToMove = shield;
+            }
+            return shield.user_shield_id !== userShieldId;
+          });
+        else if (char.id === moveToCharId) moveToCharAt = i;
+        return char;
+      });
+      characters[moveToCharAt].shields = [...characters[moveToCharAt].shields, shieldToMove];
+      this.setState({ characters: characters });
+    });
   };
 
   setError = error => {
@@ -166,11 +273,17 @@ export class CharacterProvider extends Component {
       clearError: this.clearError,
       clearContext: this.clearContext,
       handleSubmitAddCharacter: this.handleSubmitAddCharacter,
+      handleSubmitEditCharacter: this.handleSubmitEditCharacter,
+      handleDeleteCharacter: this.handleDeleteCharacter,
       handleSubmitWeapon: this.handleSubmitWeapon,
       handleSubmitShield: this.handleSubmitShield,
       updateChars: this.updateChars,
       addWeaponClickEvent: this.addWeaponClickEvent,
       addShieldClickEvent: this.addShieldClickEvent,
+      handleDeleteWeapon: this.handleDeleteWeapon,
+      handleDeleteShield: this.handleDeleteShield,
+      handleMoveWeapon: this.handleMoveWeapon,
+      handleMoveShield: this.handleMoveShield,
       initCharacters: this.initCharacters,
       initCharacterWeapons: this.initCharacterWeapons,
       initCharacterShields: this.initCharacterShields

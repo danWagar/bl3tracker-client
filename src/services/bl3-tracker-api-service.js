@@ -47,6 +47,20 @@ const Bl3TrackerApiService = {
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
 
+  deleteUserWeapon(id) {
+    return fetch(`${config.API_ENDPOINT}/inventory/weapons/${id}`, {
+      method: 'DELETE',
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
+  },
+
+  deleteUserShield(id) {
+    return fetch(`${config.API_ENDPOINT}/inventory/shields/${id}`, {
+      method: 'DELETE',
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
+  },
+
   getCharacters() {
     return fetch(`${config.API_ENDPOINT}/characters`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
@@ -62,6 +76,25 @@ const Bl3TrackerApiService = {
       },
       body: JSON.stringify(newChar)
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
+  patchCharacter(id, updatedChar) {
+    return fetch(`${config.API_ENDPOINT}/characters/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(updatedChar)
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
+  },
+
+  deleteCharacter(id) {
+    console.log('deleting character ' + id);
+    return fetch(`${config.API_ENDPOINT}/characters/${id}`, {
+      method: 'DELETE',
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
   },
 
   getCharacterWeapons(char_id) {
@@ -92,6 +125,28 @@ const Bl3TrackerApiService = {
     return fetch(`${config.API_ENDPOINT}/anointments${qs}`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
+  patchUserWeapon(id, toUpdate) {
+    return fetch(`${config.API_ENDPOINT}/inventory/weapons/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(toUpdate)
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
+  },
+
+  patchUserShield(id, toUpdate) {
+    return fetch(`${config.API_ENDPOINT}/inventory/shields/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(toUpdate)
+    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
   }
 };
 
