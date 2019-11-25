@@ -144,6 +144,24 @@ export class CharacterProvider extends Component {
       });
   };
 
+  handleEditWeapon = toUpdate => {
+    for (const [key, value] of Object.entries(toUpdate)) if (value === '') toUpdate[key] = null;
+    this.setState({ error: null });
+    let characters = this.state.characters;
+    trackerService
+      .patchUserWeapon(toUpdate.id, toUpdate)
+      .then(updatedWpn => {
+        characters = characters.map(char => {
+          char.weapons = char.weapons.map(wpn => {
+            if (wpn.user_weapon_id === updatedWpn.user_weapon_id) wpn = updatedWpn;
+            return wpn;
+          });
+          return char;
+        });
+      })
+      .then(() => this.setState({ characters: characters }));
+  };
+
   handleSubmitShield = shield => {
     for (const [key, value] of Object.entries(shield)) if (value === '') shield[key] = null;
 
@@ -276,6 +294,7 @@ export class CharacterProvider extends Component {
       handleSubmitEditCharacter: this.handleSubmitEditCharacter,
       handleDeleteCharacter: this.handleDeleteCharacter,
       handleSubmitWeapon: this.handleSubmitWeapon,
+      handleEditWeapon: this.handleEditWeapon,
       handleSubmitShield: this.handleSubmitShield,
       updateChars: this.updateChars,
       addWeaponClickEvent: this.addWeaponClickEvent,

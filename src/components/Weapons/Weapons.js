@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import EditWeaponForm from '../EditWeaponForm/EditWeaponForm';
 import CharacterContext from '../../contexts/CharacterContext';
 
 export default class Weapons extends Component {
   static contextType = CharacterContext;
+
+  state = { wpnId: null };
 
   getCharAsOption = (char, wpn) => {
     return (
@@ -18,6 +21,16 @@ export default class Weapons extends Component {
     );
   };
 
+  editClickEvent = e => {
+    let wpnId = Number(e.target.value);
+    if (this.state.wpnId === wpnId) wpnId = null;
+    this.setState({ wpnId: wpnId });
+  };
+
+  setEditWeaponIdToNull = () => {
+    this.setState({ wpnId: null });
+  };
+
   render() {
     const { characters, handleMoveWeapon, handleDeleteWeapon } = this.context;
     const character = characters.find(char => {
@@ -27,9 +40,9 @@ export default class Weapons extends Component {
     return (
       <ul>
         <h3>Weapons</h3>
-        {weapons.map(wpn => {
-          return (
-            <li>
+        {weapons.map(wpn => (
+          <li>
+            <div>
               {wpn.pre_title_1} {wpn.pre_title_2} {wpn.name} dmg: {wpn.damage} acc: {wpn.accuracy}% hnd:{' '}
               {wpn.handling}% rld: {wpn.reload_time}s fr: {wpn.fire_rate}/s mag: {wpn.magazine_size}
               <label htmlFor="moveWeapon">Move To:</label>
@@ -37,12 +50,20 @@ export default class Weapons extends Component {
                 <option></option>
                 {characters.map(char => this.getCharAsOption(char, wpn))}
               </select>
+              <button value={wpn.user_weapon_id} onClick={this.editClickEvent}>
+                edit
+              </button>
               <button value={wpn.user_weapon_id} onClick={handleDeleteWeapon}>
                 delete
               </button>
-            </li>
-          );
-        })}
+            </div>
+            <div>
+              {this.state.wpnId === wpn.user_weapon_id && (
+                <EditWeaponForm wpn={wpn} setEditWeaponIdToNull={this.setEditWeaponIdToNull} />
+              )}
+            </div>
+          </li>
+        ))}
       </ul>
     );
   }

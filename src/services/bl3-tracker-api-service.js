@@ -25,6 +25,12 @@ const Bl3TrackerApiService = {
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
 
+  getParsedWeapon(user_weapon_id) {
+    return fetch(`${config.API_ENDPOINT}/inventory/weapon/${user_weapon_id}`, {
+      headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
+  },
+
   postWeapon(wpn_data) {
     return fetch(`${config.API_ENDPOINT}/inventory/weapons`, {
       method: 'POST',
@@ -135,7 +141,7 @@ const Bl3TrackerApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify(toUpdate)
-    }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));
   },
 
   patchUserShield(id, toUpdate) {
