@@ -1,48 +1,46 @@
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
+import ShieldsTable from '../ShieldsTable/ShieldsTable';
+import StyleIcon from '../StyleIcon/StyleIcon';
+import Shield from '../Shield/Shield';
 
 export default class Shields extends Component {
   static contextType = CharacterContext;
 
-  getCharAsOption = (char, shield) => {
-    return (
-      <option
-        value={JSON.stringify({
-          currentChar: this.props.charId,
-          moveToCharId: char.id,
-          userShieldId: shield.user_shield_id
-        })}
-      >
-        {char.character_name}
-      </option>
-    );
-  };
+  state = { expand: true };
 
   render() {
-    const { characters, handleMoveShield, handleDeleteShield } = this.context;
+    const { characters, addShieldClickEvent, currentCharAddShieldExpanded } = this.context;
     const character = characters.find(char => {
       return char.id === this.props.charId;
     });
     const shields = character.shields;
     return (
-      <ul>
-        <h3>Shields</h3>
-        {shields.map(shield => {
-          return (
-            <li>
-              {shield.prefix} {shield.name}
-              <label htmlFor="moveShield">Move To:</label>
-              <select id="moveShield" onChange={handleMoveShield}>
-                <option></option>
-                {characters.map(char => this.getCharAsOption(char, shield))}
-              </select>
-              <button value={shield.user_shield_id} onClick={handleDeleteShield}>
-                delete
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="Weapons__list-container">
+        <div className="Weapons__head" onClick={() => this.setState({ expand: !this.state.expand })}>
+          <div className="Weapons__title">
+            {StyleIcon({ style: `${this.state.expand ? 'expand' : 'collapse'}` })}
+            <h3>Shields</h3>
+          </div>
+          <button
+            className="yellow_bg"
+            onClick={e => {
+              e.stopPropagation();
+              addShieldClickEvent(character.id);
+            }}
+          >
+            ADD SHIELDS
+          </button>
+        </div>
+        {currentCharAddShieldExpanded === character.id ? <ShieldsTable /> : ''}
+        {this.state.expand && (
+          <ul className="Weapons__list">
+            {shields.map(shield => (
+              <Shield shield={shield} charId={character.id} />
+            ))}
+          </ul>
+        )}
+      </div>
     );
   }
 }

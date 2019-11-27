@@ -5,6 +5,7 @@ const CharacterContext = React.createContext({
   characters: [],
   currentCharAddWeaponExpanded: null,
   currentCharAddShieldExpanded: null,
+  bankId: null,
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -16,6 +17,7 @@ export default CharacterContext;
 export class CharacterProvider extends Component {
   state = {
     characters: [],
+    bankId: null,
     currentCharAddWeaponExpanded: null,
     error: null
   };
@@ -26,6 +28,37 @@ export class CharacterProvider extends Component {
       currentCharAddWeaponExpanded: null,
       error: null
     });
+  };
+
+  initCharacters = characters => {
+    let bankId;
+    let chars = characters.map(char => {
+      char.weapons = [];
+      char.shields = [];
+      char.addInventory = false;
+      if (char.character === 'Bank') bankId = char.id;
+      return char;
+    });
+    this.setState({ characters: [...this.state.characters, ...chars], bankId: bankId });
+  };
+
+  initCharacterWeapons = (char_id, weapons) => {
+    this.setState({ error: null });
+    let characters = this.state.characters;
+    characters = characters.map(char => {
+      if (char.id === char_id) char.weapons = weapons;
+      return char;
+    });
+    this.setState({ characters: characters });
+  };
+
+  initCharacterShields = (char_id, shields) => {
+    let characters = this.state.characters;
+    characters = characters.map(char => {
+      if (char.id === char_id) char.shields = shields;
+      return char;
+    });
+    this.setState({ characters: characters });
   };
 
   handleSubmitAddCharacter = ev => {
@@ -83,35 +116,6 @@ export class CharacterProvider extends Component {
       .catch(res => {
         this.setState({ error: res.error });
       });
-  };
-
-  initCharacters = characters => {
-    let chars = characters.map(char => {
-      char.weapons = [];
-      char.shields = [];
-      char.addInventory = false;
-      return char;
-    });
-    this.setState({ characters: [...this.state.characters, ...chars] });
-  };
-
-  initCharacterWeapons = (char_id, weapons) => {
-    this.setState({ error: null });
-    let characters = this.state.characters;
-    characters = characters.map(char => {
-      if (char.id === char_id) char.weapons = weapons;
-      return char;
-    });
-    this.setState({ characters: characters });
-  };
-
-  initCharacterShields = (char_id, shields) => {
-    let characters = this.state.characters;
-    characters = characters.map(char => {
-      if (char.id === char_id) char.shields = shields;
-      return char;
-    });
-    this.setState({ characters: characters });
   };
 
   addWeaponClickEvent = id => {
@@ -284,6 +288,7 @@ export class CharacterProvider extends Component {
   render() {
     const value = {
       characters: this.state.characters,
+      bankId: this.state.bankId,
       currentCharAddWeaponExpanded: this.state.currentCharAddWeaponExpanded,
       currentCharAddShieldExpanded: this.state.currentCharAddShieldExpanded,
       error: this.state.error,

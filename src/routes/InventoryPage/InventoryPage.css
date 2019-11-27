@@ -1,24 +1,190 @@
+.InventoryPage {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.InventoryPage button {
+  border: none;
+  clip-path: polygon(0% 35%, 10% 0%, 100% 0%, 100% 65%, 90% 100%, 0% 100%);
+}
+
+.InventoryPage__add-char {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-style: italic;
+  color: black;
+  background-image: linear-gradient(0deg, #f7ef4f, #fed302);
+}
+
+.Character__container {
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 1px;
+  background-image: linear-gradient(90deg, #1a1a1a 10%, #2c2c2c, #1a1a1a 90%);
+}
+
+.Character__container h2 {
+  font-size: 1.8rem;
+}
+
+.Character__container button {
+  min-width: 70px;
+  padding: 7px 10px 7px 10px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.Character__head,
+.Character__action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px 0 15px;
+}
+
+.Character__action {
+  padding-bottom: 10px;
+}
+
+.Weapons__list-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Weapons__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Weapons__head h3 {
+  color: #fed302;
+  margin-left: 10px;
+}
+
+.Weapons__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Weapons__list {
+  width: 100%;
+  margin-left: -40px;
+}
+
+.Weapon__card {
+  width: 95%;
+  padding-bottom: 5px;
+  margin: 0 auto;
+}
+
+.Weapons__li:nth-child(odd) {
+  background-color: ;
+}
+
+.Weapon__li:nth-child(even) {
+}
+
+.Weapon__head:hover {
+  cursor: pointer;
+}
+
+.Weapon__title {
+  padding-left: 10px;
+  padding-right: 8px;
+}
+
+.Weapon__title span {
+  color: white;
+  padding-right: 8px;
+}
+
+.Weapon__details {
+  padding-top: 8px;
+}
+
+.Weapon__stats {
+  padding-bottom: 8px;
+}
+
+.Weapon__stats li {
+  margin: 5px 0;
+}
+
+.Weapon__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Weapon__actions select {
+  width: 90px;
+}
+
+.Weapon__actions label {
+  margin-right: 8px;
+}
+
+.WeaponsTable__filters {
+  margin-bottom: 10px;
+}
+
+.WeaponsTable__filters label {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.WeaponsTable__filters label:first-child {
+  padding-left: 0;
+}
+
+.Shields__list {
+  width: 95%;
+  margin: 0 auto;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 table {
+  width: 100%;
+  max-width: 100%;
+  padding-top: 10px;
+  line-height: 1.4rem;
   border-collapse: collapse;
 }
 
 thead {
   display: table-header-group;
   text-align: left;
+  background-color: #3db3fb;
 }
 
 th:nth-child(1) {
   width: 40px;
 }
 th:nth-child(2) {
-  width: 150px;
+  width: 80px;
 }
 th:nth-child(3) {
+  width: 100px;
+}
+
+th:nth-child(4) {
   width: 120px;
 }
 
 tbody {
   display: table-row-group;
+}
+
+tr:nth-child(1) {
+  background-color: black;
 }
 
 tr:nth-child(even) {

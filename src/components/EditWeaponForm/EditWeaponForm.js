@@ -34,20 +34,7 @@ export default class EditWeaponForm extends Component {
       </>
     );
   }
-  /*
-  addPrefix2Options() {
-    return (
-      <>
-        <option value="">none</option>
-        {this.state.prefixes.map(pf => (
-          <option value={pf.id} selected={this.props.wpn.prefix_2 === pf.id ? true : false}>
-            {pf.title}
-          </option>
-        ))}
-      </>
-    );
-  }
-*/
+
   applyFilterToAnointments = e => {
     if (e.target.id === 'EditWeaponForm_filter_terror') this.filters.terror = !this.filters.terror;
     if (e.target.name === 'class') this.filters.class = e.target.value;
@@ -102,20 +89,6 @@ export default class EditWeaponForm extends Component {
       fire_rate: fire_rate.value,
       magazine_size: magazine_size.value
     });
-    /*    this.context.handleEditWeapon({
-      id: this.props.wpn.user_weapon_id,
-      prefix_1: Number(prefix_1.value),
-      prefix_2: Number(prefix_2.value),
-      element: element.value,
-      anointment_id: Number(anointment_id.value),
-      item_score: Number(item_score.value),
-      damage: Number(damage.value),
-      accuracy: Number(accuracy.value),
-      handling: Number(handling.value),
-      reload_time: Number(reload_time.value),
-      fire_rate: Number(fire_rate.value),
-      magazine_size: Number(magazine_size.value)
-    });*/
 
     this.props.setEditWeaponIdToNull();
   };

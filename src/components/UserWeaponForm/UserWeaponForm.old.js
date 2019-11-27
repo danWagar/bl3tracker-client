@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import trackerService from '../../services/bl3-tracker-api-service';
-import CustomSelect from '../CustomSelect/CustomSelect';
 
 export default class UserWeaponForm extends Component {
   static contextType = CharacterContext;
 
   state = {
     prefixes: [],
-    anointments: [],
-    prefixIdFirst: null,
-    prefixIdSecond: null,
-    element: 'normal',
-    anointmentId: null
+    anointments: []
   };
 
   filters = {
@@ -21,77 +16,63 @@ export default class UserWeaponForm extends Component {
   };
 
   componentDidMount() {
-    trackerService.getPrefixes(this.props.mfr_id).then(res => this.initPrefixes(res));
-    trackerService.getAnointments().then(res => this.initAnointments(res));
+    trackerService.getPrefixes(this.props.mfr_id).then(res => this.setState({ prefixes: [...res] }));
+    trackerService.getAnointments().then(res => this.setState({ anointments: [...res] }));.
   }
 
-  initPrefixes(prefixes) {
-    this.setState({ prefixes: prefixes.map(prefix => ({ id: prefix.id, text: prefix.title })) });
+  addPrefixOptions() {
+    return (
+      <>
+        <option value="">none</option>
+        {this.state.prefixes.map(pf => (
+          <option value={pf.id}>{pf.title}</option>
+        ))}
+      </>
+    );
   }
-
-  initAnointments(anointments) {
-    this.setState({
-      anointments: anointments.map(anointment => ({ id: anointment.id, text: anointment.description }))
-    });
-  }
-
-  setStatePrefix1 = val => {
-    this.setState({ prefixIdFirst: val });
-  };
-
-  setStatePrefix2 = val => {
-    this.setState({ prefixIdSecond: val });
-  };
-
-  setStateElement = val => {
-    this.setState({ element: val });
-  };
-
-  setStateAnointmentId = val => {
-    this.setState({ anointmentId: val });
-  };
-
-  getFirstPrefixText = () => {
-    let pf;
-    if (this.state.prefixIdFirst) pf = this.state.prefixes.find(pf => pf.id === this.state.prefixIdFirst);
-    else return '';
-    return pf.text;
-  };
-
-  getSecondPrefixText = () => {
-    let pf;
-    if (this.state.prefixIdSecond) pf = this.state.prefixes.find(pf => pf.id === this.state.prefixIdSecond);
-    else return '';
-    return pf.text;
-  };
-
-  getAnointmentText = () => {
-    let anointment;
-    if (this.state.anointmentId)
-      anointment = this.state.anointments.find(a => a.id === this.state.anointmentId);
-    else return '';
-    return anointment.text;
-  };
 
   applyFilterToAnointments = e => {
     if (e.target.id === 'UserWeaponForm_filter_terror') this.filters.terror = !this.filters.terror;
     if (e.target.name === 'class') this.filters.class = e.target.value;
     trackerService
       .getAnointments(this.filters.terror, this.filters.class)
-      .then(res => this.initAnointments(res));
+      .then(res => this.setState({ anointments: [...res] }));
   };
+
+  addAnointmentsOptions() {
+    return (
+      <>
+        <option value="">none</option>
+        {this.state.anointments.map(anointment => {
+          return <option value={anointment.id}>{anointment.description}</option>;
+        })}
+      </>
+    );
+  }
 
   handleSubmit = e => {
     e.preventDefault();
-    const { item_score, damage, accuracy, handling, reload_time, fire_rate, magazine_size } = e.target;
+    const {
+      prefix_1,
+      prefix_2,
+      element,
+      anointment_id,
+      item_score,
+      damage,
+      accuracy,
+      handling,
+      reload_time,
+      fire_rate,
+      magazine_size
+    } = e.target;
 
     this.context.handleSubmitWeapon({
       char_id: this.context.currentCharAddWeaponExpanded,
       weapon_id: this.props.weapon_id,
-      prefix_1: this.state.prefixIdFirst,
-      prefix_2: this.state.prefixIdSecond,
-      element: this.state.element,
-      anointment_id: this.state.anointmentId,
+      prefix_1: prefix_1.value,
+      prefix_2: prefix_2.value,
+      element: element.value,
+      anointment_id: anointment_id.value,
       item_score: item_score.value,
       damage: damage.value,
       accuracy: accuracy.value,
@@ -108,30 +89,22 @@ export default class UserWeaponForm extends Component {
     return (
       <form className="UserWeaponForm" onSubmit={this.handleSubmit}>
         <label htmlFor="UserWeaponForm__prefix1">Prefix 1</label>
-        <CustomSelect
-          options={this.state.prefixes}
-          headerText={this.getFirstPrefixText()}
-          setValue={this.setStatePrefix1}
-        />
+        <select className="custom-select" name="prefix_1" id="UserWeaponForm__prefix1">
+          {this.addPrefixOptions()}
+        </select>
         <label htmlFor="UserWeaponForm__prefix2">Prefix 2</label>
-        <CustomSelect
-          options={this.state.prefixes}
-          headerText={this.getSecondPrefixText()}
-          setValue={this.setStatePrefix2}
-        />
+        <select className="custom-select" name="prefix_2" id="UserWeaponForm__prefix2">
+          {this.addPrefixOptions()}
+        </select>
         <label htmlFor="UserWeaponForm__element">Element</label>
-        <CustomSelect
-          options={[
-            { id: 'normal', text: 'normal' },
-            { id: 'fire', text: 'fire' },
-            { id: 'corrosive', text: 'corrosive' },
-            { id: 'shock', text: 'shock' },
-            { id: 'cryo', text: 'cryo' },
-            { id: 'radiation', text: 'radiation' }
-          ]}
-          headerText={this.state.element}
-          setValue={this.setStateElement}
-        />
+        <select className="custom-select" name="element" id="UserWeaponForm__element">
+          <option value="normal">normal</option>
+          <option value="fire">fire</option>
+          <option value="corrosive">corrosive</option>
+          <option value="shock">shock</option>
+          <option value="cryo">cryo</option>
+          <option value="radiation">radiation</option>
+        </select>
         <span>Filter Anointments:</span>
         <div className="UserWeaponForm_filter">
           <label htmlFor="UserWeaponForm_filter_terror">Terror</label>
@@ -178,11 +151,9 @@ export default class UserWeaponForm extends Component {
           />
         </div>
         <label htmlFor="UserWeaponForm__anointment_id">Anointment</label>
-        <CustomSelect
-          options={this.state.anointments}
-          headerText={this.getAnointmentText()}
-          setValue={this.setStateAnointmentId}
-        />
+        <select className="custom-select" name="anointment_id" id="UserWeaponForm__anointment_id">
+          {this.addAnointmentsOptions()}
+        </select>
         <label htmlFor="UserWeaponForm__item_score">Item Score</label>
         <input type="text" name="item_score" id="UserWeaponForm__item_score" />
         <label htmlFor="UserWeaponForm__damabe">Damage</label>

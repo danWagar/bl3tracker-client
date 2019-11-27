@@ -1,8 +1,17 @@
 .Header {
-  height: 40px;
+  height: 120px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   display: flex;
-  align-items: normal;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #101010;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 90% 100%, 85% 90%, 15% 90%, 10% 100%, 0% 100%);
+}
+
+.Header img {
+  width: 180px;
+  transform: rotate(2.5deg);
 }
 
 .Header h1 {
@@ -10,26 +19,22 @@
 }
 
 .Header p {
-  margin-top: 0px;
+  margin-top: -8px;
+  margin-left: 40px;
   font-size: 20px;
+  color: #fed302;
 }
 
 .Header a {
-  color: #444;
   text-decoration: none;
 }
 
-.Header__tagline--wide {
-  opacity: 0.35;
-  margin-left: 10px;
-}
-
 .Header__tagline--narrow {
-  opacity: 0.35;
   display: block;
   text-align: center;
   display: none;
-  margin-top: 10px;
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 .Header__not-logged-in {
@@ -43,14 +48,17 @@
   background: rgb(255, 121, 121);
   color: white;
   padding: 5px 15px;
-  border-radius: 15px;
   margin-left: 10px;
 }
 
+.Header__logged-in {
+  padding: 8px 25px;
+  clip-path: polygon(0% 35%, 12% 0%, 100% 0%, 100% 65%, 88% 100%, 0% 100%);
+}
+
 .Header__logged-in a {
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  padding: 5px 15px;
-  border-radius: 15px;
+  font-size: 1.2rem;
+  color: black;
 }
 
 @media screen and (min-width: 450px) {

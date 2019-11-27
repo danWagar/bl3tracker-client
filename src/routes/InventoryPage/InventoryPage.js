@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Section } from '../../components/Utils/Utils';
 import trackerService from '../../services/bl3-tracker-api-service';
 import CharacterContext from '../../contexts/CharacterContext';
-import Characters from '../../components/Characters/Characters';
+import Character from '../../components/Character/Character';
 import AddCharacterForm from '../../components/AddCharacterForm/AddCharacterForm';
 import './InventoryPage.css';
 
@@ -43,13 +43,17 @@ export default class InventoryPage extends Component {
 
   render() {
     if (!this.state.loaded) return <p>Loading</p>;
-    const { error } = this.context;
+    const { error, characters } = this.context;
     return (
       <Section className="InventoryPage">
         {error && <p className="red">There was an error, try again</p>}
-        <button onClick={this.toggleAddCharacter}>Add Character</button>
+        <button className="InventoryPage__add-char" onClick={this.toggleAddCharacter}>
+          ADD CHARACTER
+        </button>
         {this.state.addCharacter && <AddCharacterForm toggleAddCharacter={this.toggleAddCharacter} />}
-        <Characters />
+        {characters.map(char => (
+          <Character char={char} />
+        ))}
       </Section>
     );
   }

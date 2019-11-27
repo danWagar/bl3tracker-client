@@ -1,0 +1,22 @@
+.CustomSelect__header {
+  width: 90%;
+  min-height: 25px;
+  height: auto;
+  color: black;
+  background-color: white;
+  border: 1px solid #888;
+}
+
+.CustomSelect__option {
+  width: 90%;
+  height: auto;
+  min-height: 25px;
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid #888;
+  z-index: 100;
+}
+
+.CustomSelect__option:hover {
+  background-color: dodgerblue;
+}

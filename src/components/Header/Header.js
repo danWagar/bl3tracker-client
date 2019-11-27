@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CharacterContext from '../../contexts/CharacterContext';
 import TokenService from '../../services/token-service';
+import bl3logo from '../../images/borderlands-3-logo.png';
 import './Header.css';
 
 export default class Header extends Component {
@@ -14,9 +15,9 @@ export default class Header extends Component {
 
   renderLogoutLink() {
     return (
-      <div className="Header__logged-in">
+      <div className="Header__logged-in blue_bg">
         <Link onClick={this.handleLogoutClick} to="/">
-          Logout
+          LOGOUT
         </Link>
       </div>
     );
@@ -25,8 +26,8 @@ export default class Header extends Component {
   renderLoginLink() {
     return (
       <div className="Header__not-logged-in">
-        <Link to="/login">Log in</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/login">LOG IN</Link>
+        <Link to="/register">REGISTER</Link>
       </div>
     );
   }
@@ -38,7 +39,7 @@ export default class Header extends Component {
           <h1>
             <Link to="/">
               <div>
-                <h1>Borderland 3</h1>
+                <img src={bl3logo} alt="Borderlands 3 logo" />
                 <p>Gear Tracker</p>
               </div>
             </Link>
@@ -46,7 +47,7 @@ export default class Header extends Component {
           {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}
         </nav>
 
-        <span className="Header__tagline--narrow">Rate all the things.</span>
+        <span className="Header__tagline--narrow">Present for you. You earned it.</span>
       </>
     );
   }

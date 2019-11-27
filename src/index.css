@@ -1,44 +1,63 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:200, 400');
-@import url('https://fonts.googleapis.com/css?family=Lustria');
-
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css?family=Saira+Condensed:400,500,600');
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(#3db3fb 35%, #4bb7fa, #60c2ff);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  font-family: 'Saira Condensed', sans-serfif;
+  font-style: italic;
+  font-weight: 600;
+  color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Lustria";
-  font-weight: 100;
-  color: #222;
+button {
+  border: none;
+  clip-path: polygon(0% 35%, 10% 0%, 100% 0%, 100% 65%, 90% 100%, 0% 100%);
 }
 
-p {
-  color: #555;
+.cryo {
+  color: #2ed4dd;
 }
 
-.blue {
-  color: #477ACC;
+.fire {
+  color: #faa600;
 }
 
-.yellow {
-  color: #EAC435;
+.corrosive {
+  color: #2ce02f;
 }
 
-.green {
-  color: #09a55e;
+.shock {
+  color: #0e78fb;
 }
 
-.red {
-  color: #CA1551;
+.radiation {
+  color: #d6e718;
 }
 
-.orange {
-  color: #FB4D3D;
+.Legendary {
+  color: #ed9a2d;
+}
+
+.yellow_bg {
+  background-image: linear-gradient(0deg, #f7ef4f, #fed302);
+}
+
+.blue_bg {
+  background-image: linear-gradient(0deg, #73c6fa, #3db3fb);
 }
