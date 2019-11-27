@@ -3,11 +3,6 @@
   margin: 0 auto;
 }
 
-.InventoryPage button {
-  border: none;
-  clip-path: polygon(0% 35%, 10% 0%, 100% 0%, 100% 65%, 90% 100%, 0% 100%);
-}
-
 .InventoryPage__add-char {
   padding: 10px 20px;
   font-size: 1.2rem;

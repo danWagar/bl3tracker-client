@@ -96,7 +96,6 @@ const Bl3TrackerApiService = {
   },
 
   deleteCharacter(id) {
-    console.log('deleting character ' + id);
     return fetch(`${config.API_ENDPOINT}/characters/${id}`, {
       method: 'DELETE',
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }

@@ -15,7 +15,6 @@ export default class Weapons extends Component {
       return char.id === this.props.charId;
     });
     const weapons = character.weapons;
-    console.log(weapons);
     return (
       <div className="Weapons__list-container">
         <div className="Weapons__head" onClick={() => this.setState({ expand: !this.state.expand })}>

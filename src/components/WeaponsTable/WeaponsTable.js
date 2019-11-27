@@ -18,7 +18,6 @@ export default class WeaponsTable extends Component {
 
   setFilter(fltrParam) {
     this.filter = { ...this.filter, ...fltrParam };
-    console.log(this.filter);
     //if (this.filter.mfr_id || this.filter.weapon_type)
     return `mfr_id=${this.filter.mfr_id}&weapon_type=${this.filter.weapon_type}`;
     // return '';
@@ -26,7 +25,6 @@ export default class WeaponsTable extends Component {
 
   getFilteredWeapons(qryParam) {
     trackerService.getWeapons(this.setFilter(qryParam)).then(res => {
-      console.log(res);
       return this.setState({ weapons: [...res] });
     });
   }

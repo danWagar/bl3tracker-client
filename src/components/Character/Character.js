@@ -34,7 +34,6 @@ export default class Character extends Component {
     const { bankId, handleDeleteCharacter } = this.context;
     const char = this.props.char;
     const expandIcon = StyleIcon({ style: `${this.state.expand ? 'expandBig' : 'collapseBig'}` });
-    console.log(bankId);
     return (
       <div className={`Character__container ${char.character}`}>
         <div className="Character__head" onClick={() => this.setState({ expand: !this.state.expand })}>

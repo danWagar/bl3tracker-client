@@ -13,14 +13,12 @@ export default class ShieldsTable extends Component {
 
   componentDidMount() {
     trackerService.getShields().then(res => {
-      console.log(res);
       this.setState({ shields: [...res] });
     });
   }
 
   setFilter(fltrParam) {
     this.filter = { ...this.filter, ...fltrParam };
-    console.log(this.filter);
     //if (this.filter.mfr_id || this.filter.shield_type)
     return `mfr_id=${this.filter.mfr_id}`;
     // return '';
@@ -28,13 +26,11 @@ export default class ShieldsTable extends Component {
 
   getFilteredShields(qryParam) {
     trackerService.getShields(this.setFilter(qryParam)).then(res => {
-      console.log(res);
       return this.setState({ shields: [...res] });
     });
   }
 
   render() {
-    console.log(this.state.shields);
 
     return (
       <>

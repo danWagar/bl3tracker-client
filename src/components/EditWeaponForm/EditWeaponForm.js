@@ -19,7 +19,6 @@ export default class EditWeaponForm extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.wpn);
     trackerService.getPrefixes(this.props.wpn.mfr_id).then(res => this.setState({ prefixes: [...res] }));
     trackerService.getAnointments().then(res => this.setState({ anointments: [...res] }));
   }

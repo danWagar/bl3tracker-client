@@ -196,7 +196,6 @@ export class CharacterProvider extends Component {
           char.weapons = char.weapons.filter(wpn => wpn.user_weapon_id !== id);
           return char;
         });
-        console.log(characters);
         this.setState({ characters: characters });
       })
       .catch(res => {
@@ -214,7 +213,6 @@ export class CharacterProvider extends Component {
           char.shields = char.shields.filter(shield => shield.user_shield_id !== id);
           return char;
         });
-        console.log(characters);
         this.setState({ characters: characters });
       })
       .catch(res => {
@@ -249,12 +247,10 @@ export class CharacterProvider extends Component {
   };
 
   handleMoveShield = e => {
-    console.log('in handleMoveShield');
     const { currentChar, moveToCharId, userShieldId } = JSON.parse(e.target.value);
     const toUpdate = {
       char_id: moveToCharId
     };
-    console.log(toUpdate);
 
     trackerService.patchUserShield(userShieldId, toUpdate).then(() => {
       let characters = this.state.characters;
