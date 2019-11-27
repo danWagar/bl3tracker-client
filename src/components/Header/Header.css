@@ -39,21 +39,24 @@
 
 .Header__not-logged-in {
   display: flex;
-  flex: 1;
-  align-items: center;
+  flex-direction: column;
+  align-items: right;
   justify-content: flex-end;
+  width: 120px;
+  margin-bottom: 10px;
 }
 
-.Header__not-logged-in a:last-child {
-  background: rgb(255, 121, 121);
+.Header__not-logged-in a {
   color: white;
   padding: 5px 15px;
   margin-left: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: black;
 }
 
-.Header__logged-in {
-  padding: 8px 25px;
-  clip-path: polygon(0% 35%, 12% 0%, 100% 0%, 100% 65%, 88% 100%, 0% 100%);
+.Header__not-logged-in a:last-child {
+  margin-top: 10px;
 }
 
 .Header__logged-in a {

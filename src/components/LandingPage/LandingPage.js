@@ -4,8 +4,11 @@ import './LandingPage.css';
 
 export default function LandingPage() {
   return (
-    <>
-      <p>Hello bitches</p>
-    </>
+    <div className="LandingPage">
+      <div className="LandingPage__content">
+        <h1>BLAH BLAH BLAH</h1>
+        <p>This is where you write stuff, about doing stuff, and stuff</p>
+      </div>
+    </div>
   );
 }

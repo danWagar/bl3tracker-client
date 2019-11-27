@@ -31,7 +31,6 @@ export default class ShieldsTable extends Component {
   }
 
   render() {
-
     return (
       <>
         FILTERS:

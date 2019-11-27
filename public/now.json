@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "alias": "dandwagar-bl3tracker",
+  "name": "bl3tracker-client",
+  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/index.html" }]
+}
