@@ -4,7 +4,7 @@ https://bl3tracker-client.now.sh/
 
 ## API
 
-![alt text](https://raw.githubusercontent.com/danWagar/bl3tracker-client/src/images/ScreenShot.png)
+![alt text](/src/images/ScreenShot.png)
 
 ## Summary
 
