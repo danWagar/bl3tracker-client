@@ -21,8 +21,25 @@ export default class UserWeaponForm extends Component {
   };
 
   componentDidMount() {
-    trackerService.getPrefixes(this.props.mfr_id).then(res => this.initPrefixes(res));
-    trackerService.getAnointments().then(res => this.initAnointments(res));
+    if (!this.props.edit) {
+      trackerService.getPrefixes(this.props.mfr_id).then(res => this.initPrefixes(res));
+      trackerService.getAnointments().then(res => this.initAnointments(res));
+    } else {
+      trackerService
+        .getPrefixes(this.props.wpn.mfr_id)
+        .then(res => this.initPrefixes(res))
+        .then(() => {
+          this.setStatePrefix1(this.props.wpn.prefix_1);
+          this.setStatePrefix2(this.props.wpn.prefix_2);
+        });
+      trackerService
+        .getAnointments()
+        .then(res => this.initAnointments(res))
+        .then(() => {
+          this.setStateAnointmentId(this.props.wpn.anointment_id);
+        });
+      this.setStateElement(this.props.wpn.element);
+    }
   }
 
   initPrefixes(prefixes) {
@@ -66,11 +83,12 @@ export default class UserWeaponForm extends Component {
   };
 
   getAnointmentText = () => {
+    console.log(this.state.anointmentId);
     let anointment;
     if (this.state.anointmentId)
-      anointment = this.state.anointments.find(a => a.id === this.state.anointmentId);
+      return this.state.anointments.find(a => a.id === this.state.anointmentId).text;
     else return '';
-    return anointment.text;
+    //return anointment.text;
   };
 
   applyFilterToAnointments = e => {
@@ -85,9 +103,7 @@ export default class UserWeaponForm extends Component {
     e.preventDefault();
     const { item_score, damage, accuracy, handling, reload_time, fire_rate, magazine_size } = e.target;
 
-    this.context.handleSubmitWeapon({
-      char_id: this.context.currentCharAddWeaponExpanded,
-      weapon_id: this.props.weapon_id,
+    const weaponStats = {
       prefix_1: this.state.prefixIdFirst,
       prefix_2: this.state.prefixIdSecond,
       element: this.state.element,
@@ -99,12 +115,33 @@ export default class UserWeaponForm extends Component {
       reload_time: reload_time.value,
       fire_rate: fire_rate.value,
       magazine_size: magazine_size.value
-    });
+    };
+
+    if (this.props.edit) {
+      const editedWpn = {
+        id: this.props.wpn.user_weapon_id,
+        ...weaponStats
+      };
+      this.context.handleEditWeapon(editedWpn);
+    } else {
+      const newWpn = {
+        char_id: this.context.currentCharAddWeaponExpanded,
+        weapon_id: this.props.weapon_id,
+        ...weaponStats
+      };
+      this.context.handleSubmitWeapon(newWpn);
+    }
 
     this.props.toggleAddUserItem();
   };
 
   render() {
+    let edit = false;
+    let wpn;
+    if (this.props.edit) {
+      edit = true;
+      wpn = this.props.wpn;
+    }
     return (
       <form className="UserWeaponForm" onSubmit={this.handleSubmit}>
         <label htmlFor="UserWeaponForm__prefix1">Prefix 1</label>
@@ -115,6 +152,7 @@ export default class UserWeaponForm extends Component {
         />
         <label htmlFor="UserWeaponForm__prefix2">Prefix 2</label>
         <CustomSelect
+          className="UserWeaponForm__select"
           options={this.state.prefixes}
           headerText={this.getSecondPrefixText()}
           setValue={this.setStatePrefix2}
@@ -132,10 +170,18 @@ export default class UserWeaponForm extends Component {
           headerText={this.state.element}
           setValue={this.setStateElement}
         />
-        <span>Filter Anointments:</span>
-        <div className="UserWeaponForm_filter">
-          <label htmlFor="UserWeaponForm_filter_terror">Terror</label>
-          <input type="checkbox" id="UserWeaponForm_filter_terror" onChange={this.applyFilterToAnointments} />
+        <span className="UserWeaponForm__filter_header">Filter Anointments:</span>
+        <div className="UserWeaponForm__filter">
+          <div className="UserWeaponForm__filter__event">
+            <legend>Special:</legend>
+            <label htmlFor="UserWeaponForm_filter_terror">Terror</label>
+            <input
+              type="checkbox"
+              id="UserWeaponForm_filter_terror"
+              onChange={this.applyFilterToAnointments}
+            />
+          </div>
+          <legend>Class:</legend>
           <label htmlFor="UserWeaponForm_filter_universal">Universal</label>
           <input
             type="radio"
@@ -184,20 +230,57 @@ export default class UserWeaponForm extends Component {
           setValue={this.setStateAnointmentId}
         />
         <label htmlFor="UserWeaponForm__item_score">Item Score</label>
-        <input type="text" name="item_score" id="UserWeaponForm__item_score" />
+        <input
+          type="text"
+          name="item_score"
+          id="UserWeaponForm__item_score"
+          defaultValue={edit ? wpn.item_score : ''}
+        />
         <label htmlFor="UserWeaponForm__damabe">Damage</label>
-        <input type="text" name="damage" id="UserWeaponForm__damage" />
+        <input type="text" name="damage" id="UserWeaponForm__damage" defaultValue={edit ? wpn.damage : ''} />
         <label htmlFor="UserWeaponForm__accuracy">accuracy</label>
-        <input type="text" name="accuracy" id="UserWeaponForm__accuracy" />
+        <input
+          type="text"
+          name="accuracy"
+          id="UserWeaponForm__accuracy"
+          defaultValue={edit ? wpn.accuracy : ''}
+        />
         <label htmlFor="UserWeaponForm__handling">handling</label>
-        <input type="text" name="handling" id="UserWeaponForm__handling" />
+        <input
+          type="text"
+          name="handling"
+          id="UserWeaponForm__handling"
+          defaultValue={edit ? wpn.handling : ''}
+        />
         <label htmlFor="UserWeaponForm__reload_time">Reload Time</label>
-        <input type="text" name="reload_time" id="UserWeaponForm__reload_time" />
+        <input
+          type="text"
+          name="reload_time"
+          id="UserWeaponForm__reload_time"
+          defaultValue={edit ? wpn.reload_time : ''}
+        />
         <label htmlFor="UserWeaponForm__fire_rate">Fire Rate</label>
-        <input type="text" name="fire_rate" id="UserWeaponForm__fire_rate" />
+        <input
+          type="text"
+          name="fire_rate"
+          id="UserWeaponForm__fire_rate"
+          defaultValue={edit ? wpn.fire_rate : ''}
+        />
         <label htmlFor="UserWeaponForm__magazine_size">Magazine Size</label>
-        <input type="text" name="magazine_size" id="UserWeaponForm__magazine_size" />
-        <button type="submit">Submit</button>
+        <input
+          type="text"
+          name="magazine_size"
+          id="UserWeaponForm__magazine_size"
+          defaultValue={edit ? wpn.magazine_size : ''}
+        />
+        <div className="UserWeaponForm__buttons">
+          <button className="blue_bg" type="submit">
+            SUBMIT
+          </button>
+          <button className="blue_bg" onClick={this.props.toggleAddUserItem}>
+            CANCEL
+          </button>
+        </div>
       </form>
     );
   }

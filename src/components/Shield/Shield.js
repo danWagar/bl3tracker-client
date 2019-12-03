@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import StyleIcon from '../StyleIcon/StyleIcon';
+import UserShieldForm from '../UserShieldForm/UserShieldForm';
 
 export default class Shield extends Component {
   static contextType = CharacterContext;
 
   state = { expand: false, shieldId: null };
+
+  editClickEvent = e => {
+    let shieldId = Number(e.target.value);
+    if (this.state.shieldId === shieldId) shieldId = null;
+    this.setState({ shieldId: shieldId });
+  };
+
+  setEditShieldIdToNull = () => {
+    this.setState({ shieldId: null });
+  };
 
   getCharAsOption = (char, shield) => {
     return (
@@ -54,7 +65,10 @@ export default class Shield extends Component {
                 <label htmlFor="moveShield">Move To:</label>
                 <select id="moveShield" onChange={handleMoveShield}>
                   <option></option>
-                  {characters.map(char => this.getCharAsOption(char, shield))}
+                  {characters.map(char => {
+                    if (char.id === this.props.charId) return '';
+                    return this.getCharAsOption(char, shield);
+                  })}
                 </select>
                 <button className="blue_bg" value={shield.user_shield_id} onClick={this.editClickEvent}>
                   EDIT
@@ -67,9 +81,9 @@ export default class Shield extends Component {
           )}
         </div>
         <div>
-          {/*this.state.shieldId === shield.user_weapon_id && (
-            <EditWeaponForm shield={shield} setEditWeaponIdToNull={this.setEditWeaponIdToNull} />
-          )*/}
+          {this.state.shieldId === shield.user_shield_id && (
+            <UserShieldForm shield={shield} setEditShieldIdToNull={this.setEditWeaponIdToNull} />
+          )}
         </div>
       </li>
     );

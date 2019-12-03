@@ -30,8 +30,8 @@ export default class ShieldRow extends Component {
   render() {
     return (
       <>
-        <tr>
-          <td tabIndex="0" onClick={() => this.setState({ addUserItem: !this.state.addUserItem })}>
+        <tr tabIndex="0" onClick={() => this.setState({ addUserItem: !this.state.addUserItem })}>
+          <td>
             {this.state.addUserItem ? <FontAwesomeIcon icon={faMinus} /> : <FontAwesomeIcon icon={faPlus} />}
           </td>
           <td>{this.props.shield.mfr_name}</td>

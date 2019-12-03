@@ -19,9 +19,7 @@ export default class ShieldsTable extends Component {
 
   setFilter(fltrParam) {
     this.filter = { ...this.filter, ...fltrParam };
-    //if (this.filter.mfr_id || this.filter.shield_type)
     return `mfr_id=${this.filter.mfr_id}`;
-    // return '';
   }
 
   getFilteredShields(qryParam) {
@@ -34,13 +32,15 @@ export default class ShieldsTable extends Component {
     return (
       <>
         FILTERS:
-        <label htmlFor="mfr">Manufacturer</label>
-        <select name="mfr" id="mfr" onChange={e => this.getFilteredShields({ mfr_id: e.target.value })}>
-          <option value="">All</option>
-          <option value="10">Anshin</option>
-          <option value="4">Hyperion</option>
-          <option value="11">Pangolin</option>
-        </select>
+        <div className="WeaponsTable__filters">
+          <label htmlFor="mfr">Manufacturer</label>
+          <select name="mfr" id="mfr" onChange={e => this.getFilteredShields({ mfr_id: e.target.value })}>
+            <option value="">All</option>
+            <option value="10">Anshin</option>
+            <option value="4">Hyperion</option>
+            <option value="11">Pangolin</option>
+          </select>
+        </div>
         <table>
           <thead>
             <tr>

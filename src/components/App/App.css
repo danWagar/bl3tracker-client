@@ -1,7 +1,7 @@
 .App {
   margin-top: 20px;
   padding-bottom: 20px;
-  max-width: 960px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -12,4 +12,15 @@
 
 .App__main {
   margin-top: 50px;
+}
+
+.LoginForm input,
+.RegistrationForm input {
+  max-width: 90%;
+  margin: 10px auto;
+}
+
+.LoginForm button,
+.RegistrationForm button {
+  min-width: 100px;
 }

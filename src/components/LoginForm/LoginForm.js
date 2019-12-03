@@ -54,7 +54,9 @@ export default class LoginForm extends Component {
           <label htmlFor="LoginForm__password">Password</label>
           <Input required name="password" type="password" id="LoginForm__password"></Input>
         </div>
-        <Button type="submit">Login</Button>
+        <Button className="yellow_bg" type="submit">
+          LOGIN
+        </Button>
       </form>
     );
   }

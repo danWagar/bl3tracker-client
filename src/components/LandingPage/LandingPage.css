@@ -15,7 +15,7 @@
 
 .LandingPage__content {
   position: relative;
-  top: 35%;
+  top: 38%;
   width: 80%;
   margin: 0 auto;
   text-align: center;
@@ -28,4 +28,8 @@
 
 .LandingPage p {
   font-size: 1.3rem;
+}
+
+.LandingPage h1 + p {
+  margin-top: 80px;
 }

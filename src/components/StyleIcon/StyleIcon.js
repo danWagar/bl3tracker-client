@@ -10,6 +10,7 @@ const styleIconMap = {
   expandBig: (
     <FontAwesomeIcon icon="chevron-down" style={{ fontSize: '25px', color: 'rgba(255,255,255,.5' }} />
   ),
+  select: <FontAwesomeIcon icon="caret-down" style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translate(0%, -50%)' }} />,
   corrosive: <FontAwesomeIcon className="corrosive" icon="biohazard" />,
   fire: <FontAwesomeIcon className="fire" icon="fire" />,
   shock: <FontAwesomeIcon className="shock" icon="bolt" />,

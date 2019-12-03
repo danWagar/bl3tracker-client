@@ -6,6 +6,7 @@ const CharacterContext = React.createContext({
   currentCharAddWeaponExpanded: null,
   currentCharAddShieldExpanded: null,
   bankId: null,
+  editNameCharId: null,
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -19,6 +20,7 @@ export class CharacterProvider extends Component {
     characters: [],
     bankId: null,
     currentCharAddWeaponExpanded: null,
+    editNameCharId: null,
     error: null
   };
 
@@ -82,9 +84,18 @@ export class CharacterProvider extends Component {
       });
   };
 
+  setEditNameCharId = id => {
+    if (id === this.state.editNameCharId) id = null;
+    this.setState({ editNameCharId: id });
+  };
+
+  getEditNameCharId = () => {
+    return this.state.editNameCharId;
+  };
+
   handleSubmitEditCharacter = (char_id, ev) => {
     ev.preventDefault();
-    this.setState({ error: null });
+    this.setState({ error: null, editNameCharId: null });
     const { name } = ev.target;
 
     trackerService
@@ -292,6 +303,8 @@ export class CharacterProvider extends Component {
       clearError: this.clearError,
       clearContext: this.clearContext,
       handleSubmitAddCharacter: this.handleSubmitAddCharacter,
+      setEditNameCharId: this.setEditNameCharId,
+      getEditNameCharId: this.getEditNameCharId,
       handleSubmitEditCharacter: this.handleSubmitEditCharacter,
       handleDeleteCharacter: this.handleDeleteCharacter,
       handleSubmitWeapon: this.handleSubmitWeapon,

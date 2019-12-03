@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
-import EditWeaponForm from '../EditWeaponForm/EditWeaponForm';
+import UserWeaponForm from '../UserWeaponForm/UserWeaponForm';
 import StyleIcon from '../StyleIcon/StyleIcon';
 
 export default class Weapon extends Component {
@@ -68,7 +68,10 @@ export default class Weapon extends Component {
                   <label htmlFor="moveWeapon">Move To:</label>
                   <select id="moveWeapon" onChange={handleMoveWeapon}>
                     <option></option>
-                    {characters.map(char => this.getCharAsOption(char, wpn))}
+                    {characters.map(char => {
+                      if (char.id === this.props.charId) return '';
+                      return this.getCharAsOption(char, wpn);
+                    })}
                   </select>
                 </div>
                 <button className="blue_bg" value={wpn.user_weapon_id} onClick={this.editClickEvent}>
@@ -83,7 +86,7 @@ export default class Weapon extends Component {
         </div>
         <div>
           {this.state.wpnId === wpn.user_weapon_id && (
-            <EditWeaponForm wpn={wpn} setEditWeaponIdToNull={this.setEditWeaponIdToNull} />
+            <UserWeaponForm toggleAddUserItem={this.setEditWeaponIdToNull} wpn={wpn} edit={true} />
           )}
         </div>
       </li>

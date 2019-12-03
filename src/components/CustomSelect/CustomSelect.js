@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StyleIcon from '../StyleIcon/StyleIcon';
 import './CustomSelect.css';
 
 export default class CustomSelect extends Component {
@@ -37,6 +38,7 @@ export default class CustomSelect extends Component {
       <ul className="CustomSelect">
         <li className="CustomSelect__header" onClick={this.toggleExtended}>
           {this.props.headerText}
+          {StyleIcon({ style: 'select' })}
         </li>
         {this.state.extended && this.extendOptions()}
       </ul>

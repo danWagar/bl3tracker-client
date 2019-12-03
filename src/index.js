@@ -19,7 +19,8 @@ import {
   faPlus,
   faMinus,
   faChevronUp,
-  faChevronDown
+  faChevronDown,
+  faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -33,7 +34,8 @@ library.add(
   faPlus,
   faMinus,
   faChevronUp,
-  faChevronDown
+  faChevronDown,
+  faCaretDown
 );
 
 ReactDOM.render(

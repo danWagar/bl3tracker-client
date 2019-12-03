@@ -102,7 +102,7 @@ const Bl3TrackerApiService = {
     }).then(res => !res.ok && res.json().then(e => Promise.reject(e)));
   },
 
-  getCharacterWeapons(char_id) {
+  getCharacterWeapons(char_id, qryParam) {
     return fetch(`${config.API_ENDPOINT}/inventory/weapons/${char_id}`, {
       headers: { authorization: `bearer ${TokenService.getAuthToken()}` }
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()));

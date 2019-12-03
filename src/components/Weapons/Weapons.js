@@ -22,6 +22,7 @@ export default class Weapons extends Component {
             {StyleIcon({ style: `${this.state.expand ? 'expand' : 'collapse'}` })}
             <h3>Weapons</h3>
           </div>
+
           <button
             className="yellow_bg"
             onClick={e => {

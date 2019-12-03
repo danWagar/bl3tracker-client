@@ -45,7 +45,9 @@ export default class RegistrationForm extends Component {
           </label>
           <Input name="password" type="password" required id="RegistrationForm__password"></Input>
         </div>
-        <Button type="submit">Register</Button>
+        <Button className="yellow_bg" type="submit">
+          REGISTER
+        </Button>
       </form>
     );
   }

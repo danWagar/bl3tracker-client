@@ -1,16 +1,27 @@
+.CustomSelect {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+}
+
 .CustomSelect__header {
-  width: 90%;
+  position: relative;
+  align-items: center;
+  max-width: 100%;
   min-height: 25px;
   height: auto;
+  margin: 5px 0;
+  padding: 3px 5px 3px 5px;
   color: black;
   background-color: white;
   border: 1px solid #888;
 }
 
 .CustomSelect__option {
-  width: 90%;
+  max-width: 100%;
   height: auto;
   min-height: 25px;
+  padding: 3px 5px 3px 5px;
   color: black;
   background-color: white;
   border-bottom: 1px solid #888;

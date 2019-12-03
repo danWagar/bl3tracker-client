@@ -3,7 +3,6 @@ import CharacterContext from '../../contexts/CharacterContext';
 import StyleIcon from '../StyleIcon/StyleIcon';
 import Weapons from '../Weapons/Weapons';
 import Shields from '../Shields/Shields';
-import FL4K from '../../images/fl4k.webp';
 
 export default class Character extends Component {
   static contextType = CharacterContext;
@@ -16,14 +15,18 @@ export default class Character extends Component {
 
   setEditNameCharId = e => {
     let id = Number(e.target.value);
+    this.context.setEditNameCharId(id);
+    /*
+    console.log(id);
     if (id === this.state.editNameCharId) id = null;
     this.setState({ editNameCharId: id });
+    */
   };
 
-  getEditNameForm(char_id) {
-    this.setState({ editNameCharId: null });
+  getEditNameForm(charId) {
+    //this.setState({ editNameCharId: null });
     return (
-      <form onSubmit={e => this.context.handleSubmitEditCharacter(char_id, e)}>
+      <form onSubmit={e => this.context.handleSubmitEditCharacter(charId, e)}>
         <label htmlFor="editCharName">Name</label>
         <input type="text" id="editCharName" name="name" />
       </form>
@@ -31,7 +34,7 @@ export default class Character extends Component {
   }
 
   render() {
-    const { bankId, handleDeleteCharacter } = this.context;
+    const { bankId, handleDeleteCharacter, setEditNameCharId, getEditNameCharId } = this.context;
     const char = this.props.char;
     const expandIcon = StyleIcon({ style: `${this.state.expand ? 'expandBig' : 'collapseBig'}` });
     return (
@@ -44,7 +47,7 @@ export default class Character extends Component {
         <div className="Character__action">
           {char.id !== bankId && (
             <>
-              <button className="blue_bg" value={char.id} onClick={this.setEditNameCharId}>
+              <button className="blue_bg" value={char.id} onClick={() => setEditNameCharId(char.id)}>
                 EDIT NAME
               </button>
               <button className="blue_bg" value={char.id} onClick={handleDeleteCharacter}>
@@ -53,7 +56,7 @@ export default class Character extends Component {
             </>
           )}
         </div>
-        {this.state.editNameCharId === char.id && this.getEditNameForm(char.id)}
+        {getEditNameCharId() === char.id && this.getEditNameForm(char.id)}
         {this.state.expand && (
           <>
             <Weapons charId={char.id} />

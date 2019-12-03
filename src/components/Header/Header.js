@@ -51,7 +51,7 @@ export default class Header extends Component {
           {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}
         </nav>
 
-        <span className="Header__tagline--narrow">Present for you. You earned it.</span>
+        <span className="Header__tagline">Present for you. You earned it.</span>
       </>
     );
   }
