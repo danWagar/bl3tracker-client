@@ -17,11 +17,12 @@ export default CharacterContext;
 
 export class CharacterProvider extends Component {
   state = {
-    characters: [],
+    characters: [{ character: { shields: [], weapons: [] } }],
     bankId: null,
     currentCharAddWeaponExpanded: null,
     editNameCharId: null,
-    error: null
+    error: null,
+    ...this.props.value
   };
 
   clearContext = () => {

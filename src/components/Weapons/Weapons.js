@@ -14,6 +14,7 @@ export default class Weapons extends Component {
     const character = characters.find(char => {
       return char.id === this.props.charId;
     });
+    console.log(character);
     const weapons = character.weapons;
     return (
       <div className="Weapons__list-container">

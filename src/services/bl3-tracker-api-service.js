@@ -5,7 +5,6 @@ const Bl3TrackerApiService = {
   getWeapons(qryParam) {
     let qs = '?';
     (function() {
-      //if (terror) qs = qs.concat('terror=true&');
       if (qryParam) qs = qs.concat(`${qryParam}`);
       else qs = qs.substring(0, qs.length - 1);
     })();

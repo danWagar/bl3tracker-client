@@ -2,8 +2,6 @@
 
 https://bl3tracker-client.now.sh/
 
-## API
-
 ![alt text](/src/images/ScreenShot.png)
 
 ## Summary
