@@ -18,6 +18,10 @@ inventory. The BL3 Gear Tracker app rectifies this issue by allowing the player 
 to an online app which can be viewed while playing the game. The app organizes the items in an intuitive way,
 making it easy to find items the player is looking for.
 
+## API
+
+https://github.com/danWagar/bl3tracker-server
+
 ## Technologies used
 
 *React  
