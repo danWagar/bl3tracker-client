@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input } from '../Utils/Utils';
 import CharacterContext from '../../contexts/CharacterContext';
+import './AddCharacterForm.css';
 
 export default class AddCharacterForm extends Component {
   static contextType = CharacterContext;
@@ -15,7 +16,7 @@ export default class AddCharacterForm extends Component {
     return (
       <form className="AddCharacterForm" onSubmit={this.handleFormSubmit}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
-        <div className="character">
+        <div className="AddCharacterForm__character">
           <label htmlFor="AddCharacterForm__character">Character</label>
           <select required name="character" id="AddCharacterForm__character">
             <option value="FL4K">FL4K</option>
@@ -24,11 +25,13 @@ export default class AddCharacterForm extends Component {
             <option value="Amara">Amara</option>
           </select>
         </div>
-        <div className="name">
+        <div className="AddCharacterForm__name">
           <label htmlFor="AddCharacterForm__name">Name (optional)</label>
-          <Input required name="name" type="text" id="AddCharacterForm__name"></Input>
+          <Input name="name" type="text" id="AddCharacterForm__name"></Input>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button className="link_as_btn yellow_bg" type="submit">
+          SUBMIT
+        </Button>
       </form>
     );
   }

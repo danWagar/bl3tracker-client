@@ -67,8 +67,8 @@ export class CharacterProvider extends Component {
   handleSubmitAddCharacter = ev => {
     ev.preventDefault();
     this.setState({ error: null });
-    const { character, name } = ev.target;
-
+    let { character, name } = ev.target;
+    if (!name.value) name.value = character.value;
     trackerService
       .addCharacter({
         character: character.value,

@@ -1,0 +1,16 @@
+.AddCharacterForm {
+  margin-top: 15px;
+}
+
+.AddCharacterForm__character {
+  margin-bottom: 10px;
+}
+
+.AddCharacterForm__character label {
+  margin-right: 10px;
+}
+
+.AddCharacterForm__name input {
+  margin-top: 7px;
+  margin-bottom: 15px;
+}
