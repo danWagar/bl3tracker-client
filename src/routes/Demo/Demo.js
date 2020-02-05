@@ -6,7 +6,16 @@ import './Demo.css';
 
 export default class Demo extends Component {
   static defaultProps = {
-    onLoginSuccess: () => {}
+    location: {},
+    history: {
+      push: () => {}
+    }
+  };
+
+  handleLoginSuccess = () => {
+    const { location, history } = this.props;
+    const destination = (location.state || {}).from || '/inventory';
+    history.push(destination);
   };
 
   state = { error: null };
@@ -19,7 +28,7 @@ export default class Demo extends Component {
 
     user_name.value = '';
     password.value = '';
-    this.props.onLoginSuccess();
+    this.handleLoginSuccess();
   };
 
   handleSubmitJwtAuth = ev => {
@@ -35,7 +44,7 @@ export default class Demo extends Component {
         user_name.value = '';
         password.value = '';
         TokenService.saveAuthToken(res.authToken);
-        this.props.onLoginSuccess();
+        this.handleLoginSuccess();
       })
       .catch(res => {
         this.setState({ error: res.error });
