@@ -75,6 +75,24 @@
   margin-top: 10px;
 }
 
+.Header__logged-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.Header__dashboard {
+  text-align: center;
+  color: #fed302;
+  margin-bottom: 15px;
+}
+
+.Header__dashboard:visited,
+.Header__dashboard:hover {
+  color: #fed302;
+}
+
 .Header__logged-in a {
   font-size: 1.2rem;
   color: black;

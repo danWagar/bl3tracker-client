@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from '../Header/Header';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
@@ -7,8 +7,8 @@ import LandingPage from '../LandingPage/LandingPage.js';
 import LoginPage from '../../routes/LoginPage/LoginPage';
 import InventoryPage from '../../routes/InventoryPage/InventoryPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
-import Demo from '../../routes/Demo/Demo';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
+import Demo from '../../routes/Demo/Demo';
 import './App.css';
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App__header">
-          <Header />
+          <Header location={this.props.location} />
         </header>
         <main className="App__main">
           {this.state.hasError && <p className="red">There was an error! Oh no!</p>}
@@ -41,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

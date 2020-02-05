@@ -42,7 +42,7 @@ export class CharacterProvider extends Component {
       if (char.character === 'Bank') bankId = char.id;
       return char;
     });
-    this.setState({ characters: [...this.state.characters, ...chars], bankId: bankId });
+    this.setState({ characters: chars, bankId: bankId });
   };
 
   initCharacterWeapons = (char_id, weapons) => {

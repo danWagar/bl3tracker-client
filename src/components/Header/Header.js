@@ -16,6 +16,11 @@ export default class Header extends Component {
   renderLogoutLink() {
     return (
       <div className="Header__logged-in">
+        {this.props.location.pathname === '/' && (
+          <Link className="Header__dashboard" to="/inventory">
+            Inventory
+          </Link>
+        )}
         <Link className="link_as_btn blue_bg" onClick={this.handleLogoutClick} to="/">
           LOGOUT
         </Link>
