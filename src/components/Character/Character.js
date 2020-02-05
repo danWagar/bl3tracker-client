@@ -23,12 +23,29 @@ export default class Character extends Component {
     */
   };
 
+  setEditNameCharIdNull = () => {
+    this.context.setEditNameCharId(null);
+  };
+
   getEditNameForm(charId) {
     //this.setState({ editNameCharId: null });
     return (
-      <form onSubmit={e => this.context.handleSubmitEditCharacter(charId, e)}>
-        <label htmlFor="editCharName">Name</label>
-        <input type="text" id="editCharName" name="name" />
+      <form
+        className="Characters__editNameForm"
+        onSubmit={e => this.context.handleSubmitEditCharacter(charId, e)}
+      >
+        <div>
+          <label htmlFor="editCharName">Name</label>
+          <input type="text" id="editCharName" name="name" />
+        </div>
+        <div className="Characters_editNameFormButtons">
+          <button className="blue_bg" type="submit">
+            SUBMIT
+          </button>
+          <button className="blue_bg" onClick={this.setEditNameCharIdNull}>
+            CANCEL
+          </button>
+        </div>
       </form>
     );
   }

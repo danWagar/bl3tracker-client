@@ -1,0 +1,9 @@
+.Demo {
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.Demo button {
+  width: 100px;
+}

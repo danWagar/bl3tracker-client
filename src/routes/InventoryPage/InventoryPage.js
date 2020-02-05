@@ -52,7 +52,7 @@ export default class InventoryPage extends Component {
         </button>
         {this.state.addCharacter && <AddCharacterForm toggleAddCharacter={this.toggleAddCharacter} />}
         {characters.map(char => (
-          <Character char={char} />
+          <Character key={char.id} char={char} />
         ))}
       </Section>
     );

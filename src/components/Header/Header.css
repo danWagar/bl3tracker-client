@@ -1,7 +1,9 @@
 .Header {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 120px;
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -16,6 +18,7 @@
     10% 100%,
     0% 100%
   );
+  z-index: 5;
 }
 
 .Header img {
@@ -39,11 +42,15 @@
 }
 
 .Header__tagline {
+  position: absolute;
+  top: 110px;
+  left: 0;
   display: block;
+  width: 100%;
   text-align: center;
   font-size: 1.15rem;
   font-weight: 600;
-  z-index: 100;
+  z-index: 2;
 }
 
 .Header__not-logged-in {

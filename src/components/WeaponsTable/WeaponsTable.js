@@ -22,14 +22,16 @@ export default class WeaponsTable extends Component {
         <WeaponFilters setWeaponState={this.setWeaponState} />
         <table>
           <thead>
-            <th></th>
-            <th>Mfr.</th>
-            <th>TYPE</th>
-            <th>NAME</th>
+            <tr>
+              <th></th>
+              <th>Mfr.</th>
+              <th>TYPE</th>
+              <th>NAME</th>
+            </tr>
           </thead>
           <tbody>
             {this.state.weapons.map(wpn => (
-              <WeaponRow item={wpn} />
+              <WeaponRow key={wpn.id} item={wpn} />
             ))}
           </tbody>
         </table>

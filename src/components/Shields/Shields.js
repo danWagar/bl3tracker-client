@@ -36,7 +36,7 @@ export default class Shields extends Component {
         {this.state.expand && (
           <ul className="Weapons__list">
             {shields.map(shield => (
-              <Shield shield={shield} charId={character.id} />
+              <Shield key={shield.user_shield_id} shield={shield} charId={character.id} />
             ))}
           </ul>
         )}

@@ -233,3 +233,21 @@ tr:nth-child(odd) {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.Characters__editNameForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+}
+
+.Characters__editNameForm label {
+  margin-right: 10px;
+}
+
+.Characters_editNameFormButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}

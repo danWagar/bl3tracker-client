@@ -136,6 +136,7 @@ export default class UserShieldForm extends Component {
     });
 
     this.props.toggleAddUserItem();
+    this.context.addShieldClickEvent(this.context.currentCharAddShieldExpanded);
   };
 
   render() {

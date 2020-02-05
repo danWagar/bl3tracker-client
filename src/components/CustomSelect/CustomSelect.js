@@ -12,13 +12,13 @@ export default class CustomSelect extends Component {
   };
 
   extendOptions = () => {
-    return this.props.options.map(option => {
+    return this.props.options.map((option, i) => {
       return typeof option.id === 'number' ? (
-        <li className="CustomSelect__option" value={option.id} onClick={this.handleSelect}>
+        <li className="CustomSelect__option" key={i} value={option.id} onClick={this.handleSelect}>
           {option.text}
         </li>
       ) : (
-        <li className="CustomSelect__option" data-value={option.id} onClick={this.handleSelect}>
+        <li className="CustomSelect__option" key={i} data-value={option.id} onClick={this.handleSelect}>
           {option.text}
         </li>
       );
@@ -36,7 +36,7 @@ export default class CustomSelect extends Component {
   render() {
     return (
       <ul className="CustomSelect">
-        <li className="CustomSelect__header" onClick={this.toggleExtended}>
+        <li className="CustomSelect__header" key="1" onClick={this.toggleExtended}>
           {this.props.headerText}
           {StyleIcon({ style: 'select' })}
         </li>

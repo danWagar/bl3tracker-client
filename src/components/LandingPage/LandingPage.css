@@ -1,22 +1,24 @@
 .LandingPage {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 667px;
   background-color: black;
-  background-image: linear-gradient(black 10%, rgba(0, 0, 0, 0.4), black 95%),
+  background-image: linear-gradient(black 30px, rgba(0, 0, 0, 0.4), black 530px),
     linear-gradient(90deg, black, rgba(0, 0, 0, 0.3), black), url('../../images/bl3-background.webp');
-  background-repeat: none;
-  background-position: 48.5% 70%;
+  background-repeat: no-repeat;
+  background-position: 48.5% 130px;
   background-size: 1000px;
-  z-index: -1;
+  overflow-y: hidden;
 }
 
 .LandingPage__content {
-  position: relative;
-  top: 38%;
-  width: 80%;
+  position: absolute;
+  top: 280px;
+  left: calc(50% - 140px);
+  width: 280px;
   margin: 0 auto;
   text-align: center;
   color: white;
@@ -33,3 +35,43 @@
 .LandingPage h1 + p {
   margin-top: 80px;
 }
+
+@media (min-width: 1024px) {
+  .LandingPage {
+    min-height: 720px;
+    background-image: linear-gradient(black 10px, rgba(0, 0, 0, 0.45), black 730px),
+      linear-gradient(90deg, black, rgba(0, 0, 0, 0.3), black), url('../../images/bl3-background.webp');
+    background-position: 48.5% 100px;
+    background-size: 1200px;
+  }
+
+  .LandingPage__content {
+    position: absolute;
+    top: 285px;
+    width: 400px;
+    left: calc(50% - 200px);
+  }
+
+  .LandingPage h1 {
+    font-size: 3rem;
+  }
+
+  .LandingPage p {
+    font-size: 1.7rem;
+  }
+
+  .LandingPage h1 + p {
+    margin-top: 80px;
+  }
+
+  .LandingPage__demo {
+    margin: 0 auto;
+    display: grid;
+    place-content: center;
+    line-height: 2.2rem;
+    width: 130px;
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: );

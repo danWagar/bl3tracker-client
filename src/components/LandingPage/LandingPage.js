@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section } from '../Utils/Utils';
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 export default function LandingPage() {
@@ -8,9 +8,10 @@ export default function LandingPage() {
       <div className="LandingPage__content">
         <h1>NEVER FORGET</h1>
         <p>Keeping track of what gear you own or where it is in BL3 just got easy</p>
-        <p>Just click Register above to get started</p>
-        <p>Or try it out with the following credentials: </p>
-        <p>demo - password1</p>
+        <p>Just click Register above to get started or click below to try it out!</p>
+        <Link className="LandingPage__demo link_as_btn blue_bg" to="/demo">
+          DEMO
+        </Link>
       </div>
     </div>
   );

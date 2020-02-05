@@ -83,8 +83,6 @@ export default class UserWeaponForm extends Component {
   };
 
   getAnointmentText = () => {
-    console.log(this.state.anointmentId);
-    let anointment;
     if (this.state.anointmentId)
       return this.state.anointments.find(a => a.id === this.state.anointmentId).text;
     else return '';
@@ -99,7 +97,7 @@ export default class UserWeaponForm extends Component {
       .then(res => this.initAnointments(res));
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { item_score, damage, accuracy, handling, reload_time, fire_rate, magazine_size } = e.target;
 
@@ -122,17 +120,18 @@ export default class UserWeaponForm extends Component {
         id: this.props.wpn.user_weapon_id,
         ...weaponStats
       };
-      this.context.handleEditWeapon(editedWpn);
+      await this.context.handleEditWeapon(editedWpn);
     } else {
       const newWpn = {
         char_id: this.context.currentCharAddWeaponExpanded,
         weapon_id: this.props.weapon_id,
         ...weaponStats
       };
-      this.context.handleSubmitWeapon(newWpn);
+      await this.context.handleSubmitWeapon(newWpn);
     }
 
     this.props.toggleAddUserItem();
+    this.context.addWeaponClickEvent(this.context.currentCharAddWeaponExpanded);
   };
 
   render() {

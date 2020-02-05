@@ -17,7 +17,7 @@ export default CharacterContext;
 
 export class CharacterProvider extends Component {
   state = {
-    characters: [{ character: { shields: [], weapons: [] } }],
+    characters: [],
     bankId: null,
     currentCharAddWeaponExpanded: null,
     editNameCharId: null,

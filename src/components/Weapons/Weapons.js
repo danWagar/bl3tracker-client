@@ -14,7 +14,6 @@ export default class Weapons extends Component {
     const character = characters.find(char => {
       return char.id === this.props.charId;
     });
-    console.log(character);
     const weapons = character.weapons;
     return (
       <div className="Weapons__list-container">
@@ -38,7 +37,7 @@ export default class Weapons extends Component {
         {this.state.expand && (
           <ul className="Weapons__list">
             {weapons.map(wpn => (
-              <Weapon wpn={wpn} charId={character.id} />
+              <Weapon key={wpn.user_weapon_id} wpn={wpn} charId={character.id} />
             ))}
           </ul>
         )}

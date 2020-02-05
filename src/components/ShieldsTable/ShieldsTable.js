@@ -51,7 +51,7 @@ export default class ShieldsTable extends Component {
           </thead>
           <tbody>
             {this.state.shields.map(shield => (
-              <ShieldRow shield={shield} />
+              <ShieldRow key={shield.id} shield={shield} />
             ))}
           </tbody>
         </table>

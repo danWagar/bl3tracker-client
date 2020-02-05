@@ -7,6 +7,7 @@ import LandingPage from '../LandingPage/LandingPage.js';
 import LoginPage from '../../routes/LoginPage/LoginPage';
 import InventoryPage from '../../routes/InventoryPage/InventoryPage';
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
+import Demo from '../../routes/Demo/Demo';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import './App.css';
 
@@ -30,6 +31,7 @@ class App extends Component {
             <Route exact path={'/'} component={LandingPage} />
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
+            <PublicOnlyRoute path={'/demo'} component={Demo} />
             <PrivateRoute path={'/inventory'} component={InventoryPage} />
             <Route component={NotFoundPage} />
           </Switch>
