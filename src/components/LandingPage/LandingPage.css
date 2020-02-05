@@ -38,9 +38,9 @@
 
 @media (min-width: 1024px) {
   .LandingPage {
-    min-height: 720px;
-    background-image: linear-gradient(black 10px, rgba(0, 0, 0, 0.45), black 730px),
-      linear-gradient(90deg, black, rgba(0, 0, 0, 0.3), black), url('../../images/bl3-background.webp');
+    min-height: 750px;
+    background-image: linear-gradient(black 15px, rgba(0, 0, 0, 0.45), black 620px),
+      linear-gradient(90deg, black, rgba(0, 0, 0, 0.35), black), url('../../images/bl3-background.webp');
     background-position: 48.5% 100px;
     background-size: 1200px;
   }
@@ -66,10 +66,22 @@
 
   .LandingPage__demo {
     margin: 0 auto;
+    margin-top: 50px;
     display: grid;
     place-content: center;
-    line-height: 2.2rem;
+    line-height: 2.5rem;
     width: 130px;
     font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .LandingPage {
+    min-height: 850px;
+    background-position: 48.5% 200px;
+  }
+
+  .LandingPage__content {
+    top: 385px;
   }
 }
